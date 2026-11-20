@@ -75,52 +75,52 @@ export function PermutationVsCombination() {
         {/* Side-by-side or responsive grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Combinations (Unordered) */}
-          <div className="rounded-xs border border-stone-200 bg-[#FAF9F5] p-5 space-y-4">
-            <div className="flex items-center justify-between border-b border-stone-300/80 pb-3">
+          <div className="rounded-2xl border border-emerald-200/70 bg-emerald-50/30 backdrop-blur-md p-6 space-y-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-emerald-200/60 pb-3">
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-lime-800">
+                <span className="text-[11px] font-sora font-semibold uppercase tracking-wider text-emerald-800">
                   Combination (Unordered Set)
                 </span>
-                <h4 className="text-base font-serif font-bold text-stone-900 mt-0.5">
+                <h4 className="text-base font-heading font-extrabold text-slate-900 mt-0.5">
                   Order Does NOT Matter
                 </h4>
               </div>
               <Badge variant="lime">C(3, 3) = 1 Outcome</Badge>
             </div>
 
-            <div className="rounded-md bg-white p-4 border border-stone-200 shadow-none space-y-3">
-              <span className="text-[11px] font-mono text-stone-500 uppercase tracking-wider block">
+            <div className="rounded-xl bg-white/90 p-4 border border-emerald-100 shadow-2xs space-y-3">
+              <span className="text-[11px] font-sora text-slate-500 uppercase tracking-wider block font-semibold">
                 Mathematical Set Notation:
               </span>
-              <div className="flex flex-wrap items-center gap-1.5 p-2 rounded bg-[#FAF9F5] border border-stone-200 font-mono text-xs">
-                <span className="text-stone-400 font-bold text-base">&#123;</span>
+              <div className="flex flex-wrap items-center gap-1.5 p-2.5 rounded-xl bg-slate-50/70 border border-slate-200/60 font-sora text-xs">
+                <span className="text-slate-400 font-bold text-base">&#123;</span>
                 {selectedFeatures.map((f, i) => (
                   <React.Fragment key={f}>
-                    <span className="font-semibold text-cobalt-700 bg-white px-2 py-1 rounded border border-stone-200">
+                    <span className="font-semibold text-blue-700 bg-white px-2.5 py-1 rounded-full border border-blue-200/60 shadow-2xs">
                       {f}
                     </span>
                     {i < selectedFeatures.length - 1 && (
-                      <span className="text-stone-400">,</span>
+                      <span className="text-slate-400">,</span>
                     )}
                   </React.Fragment>
                 ))}
-                <span className="text-stone-400 font-bold text-base">&#125;</span>
+                <span className="text-slate-400 font-bold text-base">&#125;</span>
               </div>
 
-              <p className="text-xs text-stone-600 leading-relaxed">
+              <p className="text-xs text-slate-600 leading-relaxed font-sans">
                 In set theory, elements within braces have no intrinsic ordering:
                 <br />
-                <code className="text-xs font-mono font-bold text-stone-800">
+                <code className="text-xs font-sora font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded border border-slate-200 mt-1 inline-block">
                   &#123;A, B, C&#125; = &#123;B, A, C&#125; = &#123;C, B, A&#125;
                 </code>
               </p>
             </div>
 
-            <div className="rounded-md bg-white p-3.5 border border-stone-200 text-xs text-stone-700 space-y-1.5">
-              <span className="font-mono text-[11px] font-bold text-lime-900 block uppercase">
+            <div className="rounded-xl bg-white/90 p-4 border border-emerald-100 text-xs text-slate-700 space-y-1.5 shadow-2xs">
+              <span className="font-heading font-bold text-emerald-950 block uppercase text-[11px]">
                 PhonePrint Application Context:
               </span>
-              <p className="text-stone-600 leading-relaxed">
+              <p className="text-slate-600 leading-relaxed font-sans">
                 The PhonePrint survey asks students:{" "}
                 <em>&quot;Choose your top three priority smartphone features.&quot;</em>{" "}
                 Whether a respondent clicks &quot;Battery Life&quot; first or
@@ -131,21 +131,21 @@ export function PermutationVsCombination() {
           </div>
 
           {/* Permutations (Ordered) */}
-          <div className="rounded-xs border border-stone-200 bg-[#FAF9F5] p-5 space-y-4">
-            <div className="flex items-center justify-between border-b border-stone-300/80 pb-3">
+          <div className="rounded-2xl border border-blue-200/70 bg-blue-50/30 backdrop-blur-md p-6 space-y-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-blue-200/60 pb-3">
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-cobalt-800">
+                <span className="text-[11px] font-sora font-semibold uppercase tracking-wider text-blue-800">
                   Permutations (Ordered Sequences)
                 </span>
-                <h4 className="text-base font-serif font-bold text-stone-900 mt-0.5">
+                <h4 className="text-base font-heading font-extrabold text-slate-900 mt-0.5">
                   Order Matters (Ranked)
                 </h4>
               </div>
               <Badge variant="cobalt">P(3, 3) = 3! = 6 Outcomes</Badge>
             </div>
 
-            <div className="rounded-md bg-white p-4 border border-stone-200 shadow-none space-y-2">
-              <span className="text-[11px] font-mono text-stone-500 uppercase tracking-wider block">
+            <div className="rounded-xl bg-white/90 p-4 border border-blue-100 shadow-2xs space-y-2">
+              <span className="text-[11px] font-sora text-slate-500 uppercase tracking-wider block font-semibold">
                 All 3! = 6 Distinct Ordered Sequences:
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">

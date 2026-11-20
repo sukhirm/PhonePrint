@@ -25,39 +25,38 @@ export function CombinationDetailModal({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 p-4 backdrop-blur-xs">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C1B18]/50 p-4 backdrop-blur-sm animate-in fade-in duration-200">
       <div
-        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xs border border-stone-200 bg-[#FAF9F5] p-6 shadow-xl text-stone-900 space-y-5"
+        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[#EAE3D5] bg-[#FAF8F5] p-6 shadow-2xl text-[#1C1B18] space-y-5"
         role="dialog"
         aria-modal="true"
       >
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-stone-200 pb-4">
+        <div className="flex items-start justify-between border-b border-[#EAE3D5] pb-4">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-xs font-bold text-stone-700 bg-white px-2 py-0.5 rounded border border-stone-200">
+            <div className="flex items-center gap-2.5">
+              <span className="font-sora text-xs font-bold text-[#1C1B18] bg-white px-2.5 py-0.5 rounded-full border border-[#EAE3D5]">
                 {combination.id}
               </span>
-              <h3 className="text-lg font-serif font-bold text-stone-900">
+              <h3 className="text-lg font-montserrat font-bold text-[#1C1B18]">
                 Feature Triplet Details
               </h3>
               {combination.isObserved ? (
-                <Badge variant="lime">
-                  Observed ({combination.observedCount} resp. •{" "}
-                  {combination.observedPercentage}%)
-                </Badge>
+                <span className="font-sora text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                  Observed ({combination.observedCount} resp. • {combination.observedPercentage}%)
+                </span>
               ) : (
                 <Badge variant="default">Theoretical Void (0 resp.)</Badge>
               )}
             </div>
-            <p className="text-xs text-stone-500 mt-1">
+            <p className="text-xs text-[#78716C] mt-1 font-sans">
               Index #{combination.index} of 35 in dynamic lexicographic enumeration
             </p>
           </div>
 
           <button
             onClick={onClose}
-            className="rounded-md p-1.5 text-stone-400 hover:bg-stone-200 hover:text-stone-700 transition-all text-sm font-bold"
+            className="rounded-full h-8 w-8 flex items-center justify-center text-[#78716C] hover:bg-[#EAE3D5] hover:text-[#1C1B18] transition-all text-sm font-bold"
             aria-label="Close dialog"
           >
             ✕
@@ -66,14 +65,14 @@ export function CombinationDetailModal({
 
         {/* Feature Triplet Badges */}
         <div>
-          <span className="text-[11px] font-mono uppercase tracking-wider text-stone-500 block mb-2">
+          <span className="text-[11px] font-sora font-semibold uppercase tracking-wider text-[#78716C] block mb-2">
             Canonical Feature Triplet:
           </span>
           <div className="flex flex-wrap gap-2">
             {combination.features.map((feature) => (
               <span
                 key={feature}
-                className="font-medium text-xs text-cobalt-800 bg-cobalt-50 px-3 py-1.5 rounded-md border border-cobalt-200 shadow-none"
+                className="font-sora font-semibold text-xs text-blue-800 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-200 shadow-2xs"
               >
                 {feature}
               </span>
@@ -83,42 +82,42 @@ export function CombinationDetailModal({
 
         {/* Empirical Distribution Breakdown */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div className="rounded-xs border border-stone-200 bg-white p-3 text-center">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+          <div className="rounded-2xl border border-[#EAE3D5] bg-white p-3.5 text-center shadow-2xs">
+            <span className="text-[10px] font-sora font-semibold uppercase tracking-wider text-[#78716C] block">
               Observed Count
             </span>
-            <div className="mt-1 font-serif text-2xl font-bold text-stone-900">
+            <div className="mt-1 font-sora text-2xl font-extrabold text-[#1C1B18]">
               {combination.observedCount}
             </div>
           </div>
 
-          <div className="rounded-xs border border-stone-200 bg-white p-3 text-center">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+          <div className="rounded-2xl border border-[#EAE3D5] bg-white p-3.5 text-center shadow-2xs">
+            <span className="text-[10px] font-sora font-semibold uppercase tracking-wider text-[#78716C] block">
               Cohort Share
             </span>
-            <div className="mt-1 font-serif text-2xl font-bold text-cobalt-700">
+            <div className="mt-1 font-sora text-2xl font-extrabold text-blue-700">
               {combination.observedPercentage}%
             </div>
           </div>
 
-          <div className="rounded-xs border border-stone-200 bg-white p-3 text-center">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+          <div className="rounded-2xl border border-[#EAE3D5] bg-white p-3.5 text-center shadow-2xs">
+            <span className="text-[10px] font-sora font-semibold uppercase tracking-wider text-[#78716C] block">
               Status
             </span>
             <div
-              className={`mt-1 font-mono font-bold text-xs ${
-                combination.isObserved ? "text-lime-700" : "text-stone-500"
+              className={`mt-1 font-sora font-bold text-xs ${
+                combination.isObserved ? "text-emerald-700" : "text-[#78716C]"
               }`}
             >
               {combination.isObserved ? "POPULATED" : "UNOBSERVED"}
             </div>
           </div>
 
-          <div className="rounded-xs border border-stone-200 bg-white p-3 text-center">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
-              Permutations
+          <div className="rounded-2xl border border-[#EAE3D5] bg-white p-3.5 text-center shadow-2xs">
+            <span className="text-[10px] font-sora font-semibold uppercase tracking-wider text-[#78716C] block">
+              Permutations (3!)
             </span>
-            <div className="mt-1 font-serif text-2xl font-bold text-stone-700">
+            <div className="mt-1 font-sora text-2xl font-extrabold text-[#1C1B18]">
               6
             </div>
           </div>
@@ -127,77 +126,58 @@ export function CombinationDetailModal({
         {/* Matching Respondent Records or Empty Set State */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono uppercase tracking-wider text-stone-700">
+            <span className="text-xs font-montserrat font-bold uppercase tracking-wider text-[#1C1B18]">
               Matching Survey Respondents
             </span>
-            <span className="font-mono text-xs text-stone-500">
+            <span className="font-sora text-xs text-[#78716C]">
               {matchingResponses.length} records
             </span>
           </div>
 
           {!combination.isObserved || matchingResponses.length === 0 ? (
-            <div className="p-6 text-center rounded-xs border border-dashed border-stone-200 bg-white">
-              <div className="text-3xl font-serif text-stone-400 mb-1">∅</div>
-              <h4 className="text-xs font-serif font-bold text-stone-800 uppercase tracking-wider">
+            <div className="p-8 text-center rounded-2xl border border-dashed border-[#EAE3D5] bg-white">
+              <div className="text-3xl font-sora text-[#A8A29E] mb-1">∅</div>
+              <h4 className="text-xs font-montserrat font-bold text-[#1C1B18] uppercase tracking-wider">
                 Empty Set: Unobserved Theoretical Combination
               </h4>
-              <p className="text-xs text-stone-500 mt-1 max-w-md mx-auto">
+              <p className="text-xs text-[#78716C] mt-1 max-w-md mx-auto font-sans">
                 No participant in the university survey chose this exact
                 three-feature combination. In discrete mathematics, its empirical
                 frequency is exactly zero.
               </p>
             </div>
           ) : (
-            <div className="overflow-x-auto rounded-xs border border-stone-200 bg-white">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-[#FAF9F5] text-[11px] font-mono uppercase tracking-wider text-stone-600 border-b border-stone-200">
-                  <tr>
-                    <th className="px-3 py-2">Respondent ID</th>
-                    <th className="px-3 py-2">Preferred Brand</th>
-                    <th className="px-3 py-2">Budget Tier</th>
-                    <th className="px-3 py-2">Primary Use</th>
-                    <th className="px-3 py-2">OS Preference</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-stone-100">
-                  {matchingResponses.map((resp) => (
-                    <tr key={resp.response_id} className="hover:bg-stone-50">
-                      <td className="px-3 py-2 font-mono font-bold text-cobalt-700">
-                        {resp.response_id}
-                      </td>
-                      <td className="px-3 py-2 font-medium text-stone-800">
-                        {resp.preferred_brand}
-                      </td>
-                      <td className="px-3 py-2 text-stone-600">
-                        {resp.budget_range}
-                      </td>
-                      <td className="px-3 py-2 text-stone-600">
-                        {resp.primary_use}
-                      </td>
-                      <td className="px-3 py-2">
-                        <span
-                          className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold ${
-                            resp.os_preference === "iOS"
-                              ? "bg-stone-100 text-stone-800"
-                              : resp.os_preference === "Android"
-                              ? "bg-lime-100 text-lime-800"
-                              : "bg-stone-100 text-stone-600"
-                          }`}
-                        >
-                          {resp.os_preference}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-56 overflow-y-auto">
+              {matchingResponses.map((resp) => (
+                <div
+                  key={resp.response_id}
+                  className="rounded-2xl border border-[#EAE3D5] bg-white p-3.5 flex items-center justify-between shadow-2xs"
+                >
+                  <div>
+                    <span className="font-sora text-xs font-bold text-[#1C1B18] block">
+                      {resp.response_id}
+                    </span>
+                    <span className="text-[11px] text-[#78716C] font-sans">
+                      {resp.budget_range} &bull; {resp.primary_use}
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <span className="font-montserrat text-xs font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200 block mb-1">
+                      {resp.preferred_brand}
+                    </span>
+                    <span className="font-sora text-[10px] text-[#A8A29E]">
+                      {resp.os_preference}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
 
         {/* Footer */}
-        <div className="flex justify-end pt-3 border-t border-stone-200">
-          <Button variant="outline" size="sm" onClick={onClose}>
+        <div className="flex justify-end pt-3 border-t border-[#EAE3D5]">
+          <Button variant="primary" size="sm" onClick={onClose}>
             Close Inspector
           </Button>
         </div>

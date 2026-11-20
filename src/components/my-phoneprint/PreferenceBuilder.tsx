@@ -3,7 +3,6 @@
 import React from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
 import {
   SMARTPHONE_BRANDS,
   BUDGET_RANGES,
@@ -27,13 +26,15 @@ export interface PreferenceBuilderProps {
 
 interface PresetOption {
   label: string;
+  emoji: string;
   description: string;
   profile: UserProfileInput;
 }
 
 const PRESET_OPTIONS: PresetOption[] = [
   {
-    label: "Apple Flagship Creator",
+    label: "Flagship Creator",
+    emoji: "✨",
     description: "Apple • Above ₹60,000 • Camera, Battery, Build",
     profile: {
       brand: "Apple",
@@ -46,7 +47,8 @@ const PRESET_OPTIONS: PresetOption[] = [
     },
   },
   {
-    label: "Google Everyday General",
+    label: "Everyday Intelligence",
+    emoji: "🤖",
     description: "Google • ₹15,000 - ₹30,000 • Camera, Battery, Software",
     profile: {
       brand: "Google",
@@ -59,7 +61,8 @@ const PRESET_OPTIONS: PresetOption[] = [
     },
   },
   {
-    label: "Samsung Gaming Enthusiast",
+    label: "Speed & Gaming",
+    emoji: "⚡",
     description: "Samsung • ₹30,000 - ₹60,000 • Display, Processing, Storage",
     profile: {
       brand: "Samsung",
@@ -72,7 +75,8 @@ const PRESET_OPTIONS: PresetOption[] = [
     },
   },
   {
-    label: "Budget Efficiency Power",
+    label: "Budget Endurance",
+    emoji: "🔋",
     description: "Xiaomi • Under ₹15,000 • Battery, Storage, Processing",
     profile: {
       brand: "Xiaomi",
@@ -99,9 +103,9 @@ export function PreferenceBuilder({
   const isFeatureCountValid = features.length === 3;
 
   return (
-    <Card className="border-stone-300/80 shadow-none">
+    <Card className="shadow-[0_15px_40px_-15px_rgba(44,38,28,0.06)] border-[#EAE3D5]">
       <CardHeader
-        title="Construct Your Preference Vector"
+        title="1. Construct Your Preference Vector"
         subtitle="Specify target brand, budget tier, and exactly three priority features"
         badge={
           isFeatureCountValid ? (
@@ -112,12 +116,12 @@ export function PreferenceBuilder({
         }
       />
       <CardContent className="space-y-6">
-        {/* Quick Persona Presets */}
+        {/* Curated Presets Bar */}
         <div>
-          <label className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block mb-2 font-bold">
-            [ BENCHMARK PRESETS ]
-          </label>
-          <div className="flex flex-wrap gap-1.5">
+          <span className="text-[11px] font-sora font-semibold uppercase tracking-wider text-stone-500 block mb-2.5">
+            Campus Archetypes &amp; Quick Presets
+          </span>
+          <div className="flex flex-wrap gap-2">
             {PRESET_OPTIONS.map((preset) => {
               const isActive =
                 brand === preset.profile.brand &&
@@ -126,15 +130,17 @@ export function PreferenceBuilder({
               return (
                 <button
                   key={preset.label}
+                  type="button"
                   onClick={() => onApplyPreset(preset.profile)}
-                  className={`px-3 py-1.5 rounded-xs text-xs font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-2xl text-xs font-semibold font-sora transition-all duration-200 flex items-center gap-2 cursor-pointer border ${
                     isActive
-                      ? "bg-stone-900 text-white shadow-none"
-                      : "bg-white hover:bg-stone-100 text-stone-800 border border-stone-300/80"
+                      ? "bg-[#1C1B18] text-white border-[#1C1B18] shadow-xs scale-[1.02]"
+                      : "bg-[#FAF8F5] hover:bg-[#F5F1E8] text-stone-700 border-[#EAE3D5]"
                   }`}
                   title={preset.description}
                 >
-                  {preset.label}
+                  <span>{preset.emoji}</span>
+                  <span>{preset.label}</span>
                 </button>
               );
             })}
@@ -144,15 +150,15 @@ export function PreferenceBuilder({
         {/* Step A & B: Brand and Budget Selectors */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Brand Selection */}
-          <div className="rounded-xs border border-stone-300/80 bg-[#FAF9F5] p-4 space-y-2">
+          <div className="rounded-3xl border border-[#EAE3D5] bg-[#FAF8F5] p-5 space-y-2">
             <div className="flex items-center justify-between">
               <label
                 htmlFor="select-brand"
-                className="text-xs font-semibold text-stone-900 tracking-tight"
+                className="text-xs font-heading font-extrabold text-[#1C1B18] tracking-tight uppercase"
               >
-                1. Preferred Brand (B)
+                Target Brand (Set B)
               </label>
-              <span className="font-mono text-xs font-medium text-stone-800 bg-white px-2 py-0.5 rounded-xs border border-stone-300/80">
+              <span className="font-sora text-xs font-bold text-[#1C1B18] bg-white px-3 py-1 rounded-full border border-[#EAE3D5] shadow-2xs">
                 {brand}
               </span>
             </div>
@@ -160,7 +166,7 @@ export function PreferenceBuilder({
               id="select-brand"
               value={brand}
               onChange={(e) => setBrand(e.target.value as SmartphoneBrand)}
-              className="h-9 w-full rounded-xs border border-stone-300 bg-white px-3 text-xs font-medium text-stone-900 focus:border-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-500"
+              className="h-11 w-full rounded-2xl border border-[#EAE3D5] bg-white px-4 text-xs font-sora font-semibold text-stone-900 shadow-2xs focus:border-[#1C1B18] focus:outline-none"
             >
               {SMARTPHONE_BRANDS.map((b) => (
                 <option key={b} value={b}>
@@ -169,20 +175,20 @@ export function PreferenceBuilder({
               ))}
             </select>
             <p className="text-[11px] text-stone-500 font-sans">
-              Matches respondents where preferred_brand = &quot;{brand}&quot;
+              Filters records where preferred_brand = &quot;{brand}&quot;
             </p>
           </div>
 
           {/* Budget Selection */}
-          <div className="rounded-xs border border-stone-300/80 bg-[#FAF9F5] p-4 space-y-2">
+          <div className="rounded-3xl border border-[#EAE3D5] bg-[#FAF8F5] p-5 space-y-2">
             <div className="flex items-center justify-between">
               <label
                 htmlFor="select-budget"
-                className="text-xs font-semibold text-stone-900 tracking-tight"
+                className="text-xs font-heading font-extrabold text-[#1C1B18] tracking-tight uppercase"
               >
-                2. Budget Range (P)
+                Budget Range (Set P)
               </label>
-              <span className="font-mono text-xs font-medium text-stone-800 bg-white px-2 py-0.5 rounded-xs border border-stone-300/80">
+              <span className="font-sora text-xs font-bold text-[#1C1B18] bg-white px-3 py-1 rounded-full border border-[#EAE3D5] shadow-2xs">
                 {budget}
               </span>
             </div>
@@ -190,7 +196,7 @@ export function PreferenceBuilder({
               id="select-budget"
               value={budget}
               onChange={(e) => setBudget(e.target.value as BudgetRange)}
-              className="h-9 w-full rounded-xs border border-stone-300 bg-white px-3 text-xs font-medium text-stone-900 focus:border-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-500"
+              className="h-11 w-full rounded-2xl border border-[#EAE3D5] bg-white px-4 text-xs font-sora font-semibold text-stone-900 shadow-2xs focus:border-[#1C1B18] focus:outline-none"
             >
               {BUDGET_RANGES.map((r) => (
                 <option key={r} value={r}>
@@ -199,88 +205,69 @@ export function PreferenceBuilder({
               ))}
             </select>
             <p className="text-[11px] text-stone-500 font-sans">
-              Matches respondents where budget_range = &quot;{budget}&quot;
+              Filters records where budget_range = &quot;{budget}&quot;
             </p>
           </div>
         </div>
 
-        {/* Step C: Feature Preferences */}
-        <div className="rounded-xs border border-stone-300/80 bg-white p-4 space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/80 pb-2">
-            <div>
-              <span className="text-xs font-semibold text-stone-900 block">
-                3. Priority Feature Triplet (F)
-              </span>
-              <p className="text-xs text-stone-500 font-sans">
-                Select exactly three distinct canonical features. Selection is unranked (order does not matter).
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <span
-                className={`font-mono text-xs font-medium px-2 py-0.5 rounded-xs ${
-                  isFeatureCountValid
-                    ? "bg-lime-50 text-lime-900 border border-lime-300"
-                    : "bg-amber-50 text-amber-900 border border-amber-300"
-                }`}
-              >
-                {features.length} / 3 Selected
-              </span>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={resetPreferences}
-                className="text-xs h-7 px-2"
-              >
-                Reset
-              </Button>
-            </div>
+        {/* Step C: Feature Triplet Selection */}
+        <div className="space-y-3 pt-2">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-heading font-extrabold text-[#1C1B18] uppercase tracking-wide">
+              Feature Triplet (Set F) — Pick Exactly 3
+            </span>
+            <span className="font-sora text-xs font-bold text-stone-600">
+              {features.length} of 3 selected
+            </span>
           </div>
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 pt-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
             {SMARTPHONE_FEATURES.map((feature) => {
               const isSelected = features.includes(feature);
               const isDisabled = !isSelected && features.length >= 3;
+
               return (
                 <button
                   key={feature}
+                  type="button"
                   onClick={() => toggleFeature(feature)}
                   disabled={isDisabled}
-                  className={`p-2.5 rounded-xs border text-left text-xs font-medium transition-colors flex items-center justify-between ${
+                  className={`rounded-2xl p-3.5 text-left transition-all border flex items-center justify-between cursor-pointer ${
                     isSelected
-                      ? "border-cobalt-600 bg-cobalt-50 text-cobalt-950 font-semibold"
+                      ? "bg-[#1C1B18] text-white border-[#1C1B18] shadow-xs"
                       : isDisabled
-                      ? "border-stone-200 bg-stone-50 text-stone-400 cursor-not-allowed opacity-60"
-                      : "border-stone-300/80 bg-white hover:bg-stone-50 text-stone-800"
+                      ? "bg-[#FAF8F5]/60 text-stone-400 border-[#EAE3D5]/60 cursor-not-allowed"
+                      : "bg-[#FAF8F5] text-stone-700 border-[#EAE3D5] hover:bg-[#F5F1E8]"
                   }`}
                 >
-                  <span>{feature}</span>
+                  <span className="font-sora text-xs font-semibold">{feature}</span>
                   <span
-                    className={`font-mono text-xs ${
+                    className={`h-4 w-4 rounded-full flex items-center justify-center text-[10px] ${
                       isSelected
-                        ? "text-cobalt-700 font-bold"
-                        : isDisabled
-                        ? "text-stone-300"
-                        : "text-stone-400"
+                        ? "bg-emerald-400 text-stone-950 font-bold"
+                        : "border border-stone-300"
                     }`}
                   >
-                    {isSelected ? "✓" : "+"}
+                    {isSelected ? "✓" : ""}
                   </span>
                 </button>
               );
             })}
           </div>
+        </div>
 
-          {/* Feature selection notice */}
-          {features.length === 3 ? (
-            <p className="text-[11px] text-lime-800 font-medium font-sans">
-              ✓ Exactly 3 features selected. Deselect any active feature to swap it with another.
-            </p>
-          ) : (
-            <p className="text-[11px] text-amber-800 font-medium font-sans">
-              Please select {3 - features.length} more feature{3 - features.length > 1 ? "s" : ""} to complete your profile vector.
-            </p>
-          )}
+        {/* Reset Action Bar */}
+        <div className="pt-2 flex items-center justify-between border-t border-[#F5F1E8]">
+          <span className="font-sora text-xs text-stone-500">
+            Current Vector: {brand} • {budget} • [{features.join(", ") || "none"}]
+          </span>
+          <button
+            type="button"
+            onClick={resetPreferences}
+            className="rounded-full bg-[#FAF8F5] hover:bg-[#F5F1E8] text-stone-700 px-4 py-1.5 text-xs font-sora font-semibold border border-[#EAE3D5] transition-colors cursor-pointer"
+          >
+            Reset Vector
+          </button>
         </div>
       </CardContent>
     </Card>

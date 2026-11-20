@@ -61,17 +61,17 @@ const OPERATIONS_2SET: OperationButtonDef[] = [
 
 const OPERATIONS_3SET: OperationButtonDef[] = [
   { id: "union_abc", label: "Triple Union", symbol: "A ∪ B ∪ C", category: "core" },
-  { id: "inter_abc", label: "Triple Intersect", symbol: "A ∩ B ∩ C", category: "core" },
-  { id: "inter_ab", label: "Overlap A ∩ B", symbol: "A ∩ B", category: "core" },
-  { id: "inter_ac", label: "Overlap A ∩ C", symbol: "A ∩ C", category: "core" },
-  { id: "inter_bc", label: "Overlap B ∩ C", symbol: "B ∩ C", category: "core" },
-  { id: "only_a", label: "A Only", symbol: "A \\ (B ∪ C)", category: "relative" },
-  { id: "only_b", label: "B Only", symbol: "B \\ (A ∪ C)", category: "relative" },
-  { id: "only_c", label: "C Only", symbol: "C \\ (A ∪ B)", category: "relative" },
-  { id: "only_ab", label: "AB Only", symbol: "(A ∩ B) \\ C", category: "relative" },
-  { id: "only_ac", label: "AC Only", symbol: "(A ∩ C) \\ B", category: "relative" },
-  { id: "only_bc", label: "BC Only", symbol: "(B ∩ C) \\ A", category: "relative" },
-  { id: "outside_abc", label: "Outside / None", symbol: "(A ∪ B ∪ C)ᶜ", category: "complement" },
+  { id: "inter_abc", label: "Triple Intersection", symbol: "A ∩ B ∩ C", category: "core" },
+  { id: "inter_ab", label: "Pairwise Overlap", symbol: "A ∩ B", category: "core" },
+  { id: "inter_ac", label: "Pairwise Overlap", symbol: "A ∩ C", category: "core" },
+  { id: "inter_bc", label: "Pairwise Overlap", symbol: "B ∩ C", category: "core" },
+  { id: "only_a", label: "Region 1", symbol: "A Only", category: "relative" },
+  { id: "only_b", label: "Region 2", symbol: "B Only", category: "relative" },
+  { id: "only_c", label: "Region 3", symbol: "C Only", category: "relative" },
+  { id: "only_ab", label: "Region 4", symbol: "AB Only", category: "relative" },
+  { id: "only_ac", label: "Region 5", symbol: "AC Only", category: "relative" },
+  { id: "only_bc", label: "Region 6", symbol: "BC Only", category: "relative" },
+  { id: "outside_abc", label: "Region 8", symbol: "Outside All 3", category: "complement" },
 ];
 
 export function SetOperationsToolbar({
@@ -84,50 +84,43 @@ export function SetOperationsToolbar({
   const operations = mode === "2-set" ? OPERATIONS_2SET : OPERATIONS_3SET;
 
   return (
-    <div className="rounded-xs border border-stone-300/80 bg-white p-5 shadow-none text-stone-900 space-y-4">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-200/80 pb-3">
+    <div className="rounded-3xl border border-[#EAE3D5] bg-white p-6 shadow-[0_15px_40px_-15px_rgba(44,38,28,0.06)] space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#F5F1E8]">
         <div>
-          <div className="flex items-center gap-2">
-            <h3 className="text-sm font-semibold tracking-tight text-stone-900 font-sans">
-              Set Theoretic Operations
-            </h3>
-            <Badge variant="lime">Live Calculation</Badge>
-          </div>
-          <p className="text-xs text-stone-500 mt-0.5 font-sans">
-            Select an algebraic expression to compute the resulting respondent subset and inspect its Venn partition
+          <h4 className="text-base font-heading font-extrabold text-[#1C1B18]">
+            Set-Theoretic Algebraic Operations
+          </h4>
+          <p className="text-xs text-stone-500 font-sans">
+            Choose a boolean set operation to evaluate on student partitions
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs text-stone-500 font-sans">Result Cardinality:</span>
-          <span className="font-mono text-xs font-semibold text-stone-900 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded">
-            |Result| = {resultCardinality}
-          </span>
-          <span className="text-xs text-stone-400 font-mono">
-            ({Math.round((resultCardinality / totalUniverse) * 100)}%)
-          </span>
+          <Badge variant="cobalt">
+            Result: {resultCardinality} / {totalUniverse} ({Math.round((resultCardinality / totalUniverse) * 100)}%)
+          </Badge>
         </div>
       </div>
 
-      {/* Button Grid */}
-      <div className="flex flex-wrap items-center gap-1.5">
+      <div className="flex flex-wrap gap-2">
         {operations.map((op) => {
-          const isActive = activeOperation === op.id;
+          const isSelected = activeOperation === op.id;
+
           return (
             <button
               key={op.id}
               type="button"
               onClick={() => onSelectOperation(op.id)}
-              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400 ${
-                isActive
-                  ? "bg-stone-900 text-white shadow-none"
-                  : "bg-stone-100 text-stone-700 hover:bg-stone-200 hover:text-stone-900 border border-stone-200"
+              className={`rounded-2xl px-4 py-2 text-xs font-sora font-semibold transition-all duration-200 border flex items-center gap-2 cursor-pointer ${
+                isSelected
+                  ? "bg-[#1C1B18] text-white border-[#1C1B18] shadow-xs scale-[1.02]"
+                  : "bg-[#FAF8F5] text-stone-700 border-[#EAE3D5] hover:bg-[#F5F1E8]"
               }`}
             >
-              <span className={`font-mono text-xs font-semibold ${isActive ? "text-stone-100" : "text-stone-900"}`}>
-                {op.symbol}
+              <span>{op.symbol}</span>
+              <span className={`text-[10px] ${isSelected ? "text-stone-300" : "text-stone-400"}`}>
+                ({op.label})
               </span>
-              <span className="text-[10px] text-stone-400 hidden sm:inline font-sans">{op.label}</span>
             </button>
           );
         })}

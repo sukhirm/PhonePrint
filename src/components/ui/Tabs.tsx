@@ -22,19 +22,19 @@ export function Tabs({
   size = "md",
 }: TabsProps) {
   const sizeStyles = {
-    sm: "p-0.5 text-xs",
-    md: "p-1 text-xs sm:text-sm",
+    sm: "p-1 text-xs gap-1",
+    md: "p-1.5 text-xs sm:text-sm gap-1.5",
   };
 
   const itemSizeStyles = {
-    sm: "px-2.5 py-1",
-    md: "px-3.5 py-1.5",
+    sm: "px-3 py-1 rounded-full",
+    md: "px-4 py-1.5 rounded-full",
   };
 
   return (
     <div
       role="tablist"
-      className={`inline-flex flex-wrap items-center rounded-xs border border-stone-300/80 bg-[#F4F3EE] shadow-none ${sizeStyles[size]} ${className}`}
+      className={`inline-flex flex-wrap items-center rounded-full border border-slate-200/70 bg-slate-100/70 backdrop-blur-md shadow-xs ${sizeStyles[size]} ${className}`}
     >
       {items.map((tab) => {
         const isActive = tab.id === activeId;
@@ -44,21 +44,21 @@ export function Tabs({
             role="tab"
             aria-selected={isActive}
             onClick={() => onChange(tab.id)}
-            className={`flex items-center gap-1.5 rounded-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-400 ${
+            className={`flex items-center gap-2 font-sans font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
               itemSizeStyles[size]
             } ${
               isActive
-                ? "bg-white text-stone-900 border border-stone-300/80 shadow-none font-semibold"
-                : "text-stone-600 hover:text-stone-900 hover:bg-white/50"
+                ? "bg-white text-slate-900 font-semibold shadow-[0_2px_8px_rgba(15,23,42,0.06)] border border-slate-200/60"
+                : "text-slate-600 hover:text-slate-950 hover:bg-white/50"
             }`}
           >
             <span>{tab.label}</span>
             {tab.badge !== undefined && (
               <span
-                className={`ml-1 rounded-xs px-1.5 py-0.5 font-mono text-[10px] ${
+                className={`rounded-full px-2 py-0.5 font-sora text-[10px] font-semibold ${
                   isActive
-                    ? "bg-stone-100 text-stone-800 border border-stone-300 font-semibold"
-                    : "bg-stone-200/70 text-stone-600"
+                    ? "bg-blue-50 text-blue-700 border border-blue-200/50"
+                    : "bg-slate-200/70 text-slate-600"
                 }`}
               >
                 {tab.badge}

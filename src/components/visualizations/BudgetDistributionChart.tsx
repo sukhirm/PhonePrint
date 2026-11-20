@@ -26,57 +26,75 @@ export interface BudgetDistributionChartProps {
 
 export function BudgetDistributionChart({
   data,
-  height = 280,
+  height = 290,
 }: BudgetDistributionChartProps) {
-  // Ascending monochromatic cobalt progression mapping price tiers
-  const tierColors = [
-    "#93c5fd", // Under ₹15,000 (Entry) - Soft Cobalt
-    "#60a5fa", // ₹15,000 - ₹30,000 (Mid) - Cobalt
-    "#2563eb", // ₹30,000 - ₹60,000 (Premium) - Primary Cobalt
-    "#1d4ed8", // Above ₹60,000 (Flagship) - Deep Cobalt
-  ];
+  const getGradientId = (index: number) => {
+    return `budgetTierGrad${index}`;
+  };
 
   return (
     <div style={{ width: "100%", height }} className="pt-2">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
-          margin={{ top: 10, right: 10, left: -10, bottom: 20 }}
+          margin={{ top: 15, right: 15, left: -15, bottom: 20 }}
         >
+          <defs>
+            {/* Ascending luxury gradient progression */}
+            <linearGradient id="budgetTierGrad0" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#93C5FD" stopOpacity={0.95} />
+              <stop offset="100%" stopColor="#60A5FA" stopOpacity={0.8} />
+            </linearGradient>
+            <linearGradient id="budgetTierGrad1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" stopOpacity={0.95} />
+              <stop offset="100%" stopColor="#3B82F6" stopOpacity={0.8} />
+            </linearGradient>
+            <linearGradient id="budgetTierGrad2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#3B82F6" stopOpacity={0.95} />
+              <stop offset="100%" stopColor="#2563EB" stopOpacity={0.85} />
+            </linearGradient>
+            <linearGradient id="budgetTierGrad3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#1D4ED8" stopOpacity={0.95} />
+              <stop offset="100%" stopColor="#0F172A" stopOpacity={0.9} />
+            </linearGradient>
+          </defs>
           <CartesianGrid
-            strokeDasharray="3 3"
+            strokeDasharray="4 4"
             vertical={false}
-            stroke="#e2e8f0"
+            stroke="#F1F5F9"
           />
           <XAxis
             dataKey="budget"
-            tick={{ fontSize: 11, fill: "#334155", fontWeight: 500 }}
+            tick={{ fontSize: 11, fill: "#475569", fontFamily: "var(--font-sora), Sora, sans-serif" }}
             interval={0}
             tickLine={false}
-            axisLine={{ stroke: "#cbd5e1" }}
+            axisLine={{ stroke: "#E2E8F0" }}
           />
           <YAxis
             allowDecimals={false}
-            tick={{ fontSize: 11, fill: "#64748b" }}
+            tick={{ fontSize: 11, fill: "#94A3B8", fontFamily: "var(--font-sora), Sora, sans-serif" }}
             tickLine={false}
             axisLine={false}
             domain={[0, "auto"]}
           />
           <Tooltip
-            content={<ChartTooltip unit="Respondents" />}
+            content={<ChartTooltip unit="Students" />}
             cursor={{ fill: "rgba(37, 99, 235, 0.04)" }}
           />
           <Bar
             dataKey="count"
             name="Respondents"
-            radius={[4, 4, 0, 0]}
-            maxBarSize={44}
-            barSize={40}
+            radius={[8, 8, 0, 0]}
+            maxBarSize={48}
+            barSize={42}
+            animationDuration={800}
+            animationEasing="ease-out"
           >
             {data.map((_, index) => (
               <Cell
                 key={`budget-cell-${index}`}
-                fill={tierColors[index % tierColors.length]}
+                fill={`url(#${getGradientId(index % 4)})`}
+                className="transition-all duration-200 hover:opacity-85"
               />
             ))}
           </Bar>

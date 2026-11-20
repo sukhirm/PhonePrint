@@ -69,73 +69,73 @@ export default function ComboLabPage() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Navigation / Focus Tabs */}
-        <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-xs bg-[#FAF9F5] border border-stone-300/80">
+        <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-full bg-[#FAF8F5] border border-[#EAE3D5] shadow-2xs">
           <button
             onClick={() => setActiveTab("all")}
-            className={`px-3 py-1.5 rounded-xs text-xs font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-sora transition-all duration-200 ${
               activeTab === "all"
-                ? "bg-white text-stone-900 border border-stone-300/80 shadow-none font-semibold"
-                : "text-stone-600 hover:text-stone-900 hover:bg-white/60"
+                ? "bg-[#1C1B18] text-white shadow-xs font-bold"
+                : "text-[#78716C] hover:text-[#1C1B18] hover:bg-white font-medium"
             }`}
           >
             All Modules Overview
           </button>
           <button
             onClick={() => setActiveTab("calculator")}
-            className={`px-3 py-1.5 rounded-xs text-xs font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-sora transition-all duration-200 ${
               activeTab === "calculator"
-                ? "bg-white text-stone-900 border border-stone-300/80 shadow-none font-semibold"
-                : "text-stone-600 hover:text-stone-900 hover:bg-white/60"
+                ? "bg-[#1C1B18] text-white shadow-xs font-bold"
+                : "text-[#78716C] hover:text-[#1C1B18] hover:bg-white font-medium"
             }`}
           >
             nCr Calculator
           </button>
           <button
             onClick={() => setActiveTab("permutations")}
-            className={`px-3 py-1.5 rounded-xs text-xs font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-sora transition-all duration-200 ${
               activeTab === "permutations"
-                ? "bg-white text-stone-900 border border-stone-300/80 shadow-none font-semibold"
-                : "text-stone-600 hover:text-stone-900 hover:bg-white/60"
+                ? "bg-[#1C1B18] text-white shadow-xs font-bold"
+                : "text-[#78716C] hover:text-[#1C1B18] hover:bg-white font-medium"
             }`}
           >
             Permutations vs Combinations
           </button>
           <button
             onClick={() => setActiveTab("explorer")}
-            className={`px-3 py-1.5 rounded-xs text-xs font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-sora transition-all duration-200 ${
               activeTab === "explorer"
-                ? "bg-white text-stone-900 border border-stone-300/80 shadow-none font-semibold"
-                : "text-stone-600 hover:text-stone-900 hover:bg-white/60"
+                ? "bg-[#1C1B18] text-white shadow-xs font-bold"
+                : "text-[#78716C] hover:text-[#1C1B18] hover:bg-white font-medium"
             }`}
           >
             35-Triplet Space Explorer
           </button>
           <button
             onClick={() => setActiveTab("frequency")}
-            className={`px-3 py-1.5 rounded-xs text-xs font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-sora transition-all duration-200 ${
               activeTab === "frequency"
-                ? "bg-white text-stone-900 border border-stone-300/80 shadow-none font-semibold"
-                : "text-stone-600 hover:text-stone-900 hover:bg-white/60"
+                ? "bg-[#1C1B18] text-white shadow-xs font-bold"
+                : "text-[#78716C] hover:text-[#1C1B18] hover:bg-white font-medium"
             }`}
           >
             Frequency Ranking &amp; Voids
           </button>
           <button
             onClick={() => setActiveTab("budget")}
-            className={`px-3 py-1.5 rounded-xs text-xs font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-sora transition-all duration-200 ${
               activeTab === "budget"
-                ? "bg-white text-stone-900 border border-stone-300/80 shadow-none font-semibold"
-                : "text-stone-600 hover:text-stone-900 hover:bg-white/60"
+                ? "bg-[#1C1B18] text-white shadow-xs font-bold"
+                : "text-[#78716C] hover:text-[#1C1B18] hover:bg-white font-medium"
             }`}
           >
             Budget Stratification
           </button>
           <button
             onClick={() => setActiveTab("theory")}
-            className={`px-3 py-1.5 rounded-xs text-xs font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-sora transition-all duration-200 ${
               activeTab === "theory"
-                ? "bg-white text-stone-900 border border-stone-300/80 shadow-none font-semibold"
-                : "text-stone-600 hover:text-stone-900 hover:bg-white/60"
+                ? "bg-[#1C1B18] text-white shadow-xs font-bold"
+                : "text-[#78716C] hover:text-[#1C1B18] hover:bg-white font-medium"
             }`}
           >
             Curriculum Theory

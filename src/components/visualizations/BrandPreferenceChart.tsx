@@ -26,18 +26,16 @@ export interface BrandPreferenceChartProps {
 
 export function BrandPreferenceChart({
   data,
-  height = 280,
+  height = 290,
 }: BrandPreferenceChartProps) {
   // Sort descending to establish clear hierarchy
   const sortedData = [...data].sort((a, b) => b.count - a.count);
 
-  // Differentiation based on rank in cohort
-  const getBrandColor = (index: number) => {
-    if (index === 0) return "#1d4ed8"; // Leader - Deep Cobalt
-    if (index === 1) return "#2563eb"; // Second - Primary Cobalt
-    if (index === 2) return "#3b82f6"; // Third - Bright Cobalt
-    if (index === 3) return "#60a5fa"; // Fourth - Soft Cobalt
-    return "#64748b"; // Long tail - Muted Slate
+  const getGradientId = (index: number) => {
+    if (index === 0) return "brandGradLeader";
+    if (index === 1) return "brandGradSecond";
+    if (index === 2) return "brandGradThird";
+    return "brandGradTail";
   };
 
   return (
@@ -45,40 +43,64 @@ export function BrandPreferenceChart({
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={sortedData}
-          margin={{ top: 10, right: 10, left: -10, bottom: 20 }}
+          margin={{ top: 15, right: 15, left: -15, bottom: 20 }}
         >
+          <defs>
+            <linearGradient id="brandGradLeader" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#2563EB" stopOpacity={0.95} />
+              <stop offset="100%" stopColor="#1D4ED8" stopOpacity={0.8} />
+            </linearGradient>
+            <linearGradient id="brandGradSecond" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#3B82F6" stopOpacity={0.9} />
+              <stop offset="100%" stopColor="#2563EB" stopOpacity={0.75} />
+            </linearGradient>
+            <linearGradient id="brandGradThird" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" stopOpacity={0.9} />
+              <stop offset="100%" stopColor="#3B82F6" stopOpacity={0.7} />
+            </linearGradient>
+            <linearGradient id="brandGradTail" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#94A3B8" stopOpacity={0.85} />
+              <stop offset="100%" stopColor="#64748B" stopOpacity={0.7} />
+            </linearGradient>
+          </defs>
           <CartesianGrid
-            strokeDasharray="3 3"
+            strokeDasharray="4 4"
             vertical={false}
-            stroke="#e2e8f0"
+            stroke="#F1F5F9"
           />
           <XAxis
             dataKey="brand"
-            tick={{ fontSize: 11, fill: "#334155", fontWeight: 500 }}
+            tick={{ fontSize: 11, fill: "#475569", fontFamily: "var(--font-sora), Sora, sans-serif" }}
             interval={0}
             tickLine={false}
-            axisLine={{ stroke: "#cbd5e1" }}
+            axisLine={{ stroke: "#E2E8F0" }}
           />
           <YAxis
             allowDecimals={false}
-            tick={{ fontSize: 11, fill: "#64748b" }}
+            tick={{ fontSize: 11, fill: "#94A3B8", fontFamily: "var(--font-sora), Sora, sans-serif" }}
             tickLine={false}
             axisLine={false}
             domain={[0, "auto"]}
           />
           <Tooltip
-            content={<ChartTooltip unit="Respondents" />}
+            content={<ChartTooltip unit="Students" />}
             cursor={{ fill: "rgba(37, 99, 235, 0.04)" }}
           />
           <Bar
             dataKey="count"
             name="Respondents"
-            radius={[4, 4, 0, 0]}
-            maxBarSize={44}
-            barSize={40}
+            radius={[8, 8, 0, 0]}
+            maxBarSize={48}
+            barSize={42}
+            animationDuration={800}
+            animationEasing="ease-out"
           >
             {sortedData.map((_, index) => (
-              <Cell key={`cell-${index}`} fill={getBrandColor(index)} />
+              <Cell
+                key={`cell-${index}`}
+                fill={`url(#${getGradientId(index)})`}
+                className="transition-all duration-200 hover:opacity-85"
+              />
             ))}
           </Bar>
         </BarChart>

@@ -9,8 +9,8 @@ export interface PhonePrintLogoProps {
 
 /**
  * PhonePrint Identity Symbol:
- * Harmonizes the silhouette of a modern smartphone with biometric fingerprint contours
- * and a discrete mathematical focal node (representing individual preference in U).
+ * Refined glassmorphic brand mark combining modern smartphone silhouette,
+ * biometric contours, and mathematical data focal node.
  */
 export function PhonePrintLogo({
   size = 32,
@@ -26,78 +26,94 @@ export function PhonePrintLogo({
         viewBox="0 0 40 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="shrink-0 transition-transform duration-200 group-hover:scale-105"
+        className="shrink-0 transition-transform duration-300 group-hover:scale-105"
         aria-hidden="true"
       >
-        {/* Soft rounded container with subtle border */}
+        <defs>
+          <linearGradient id="logoCardGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#FFFFFF" stopOpacity="0.95" />
+            <stop offset="1" stopColor="#EFF6FF" stopOpacity="0.8" />
+          </linearGradient>
+          <linearGradient id="logoBorderGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#93C5FD" stopOpacity="0.6" />
+            <stop offset="1" stopColor="#E2E8F0" stopOpacity="0.5" />
+          </linearGradient>
+          <linearGradient id="nodeGrad" x1="16" y1="21" x2="24" y2="29" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#3B82F6" />
+            <stop offset="1" stopColor="#1D4ED8" />
+          </linearGradient>
+        </defs>
+
+        {/* Squircle container with glass reflection */}
         <rect
-          x="3"
-          y="2"
-          width="34"
-          height="36"
-          rx="9"
-          className="fill-stone-50 stroke-stone-300/80"
-          strokeWidth="1.5"
+          x="2.5"
+          y="2.5"
+          width="35"
+          height="35"
+          rx="10"
+          fill="url(#logoCardGrad)"
+          stroke="url(#logoBorderGrad)"
+          strokeWidth="1.2"
         />
 
-        {/* Top speaker slit (subtle phone detail) */}
-        <line
-          x1="17"
-          y1="6"
-          x2="23"
-          y2="6"
-          className="stroke-stone-400"
-          strokeWidth="1.5"
-          strokeLinecap="round"
+        {/* Top speaker slit */}
+        <rect
+          x="16.5"
+          y="6.5"
+          width="7"
+          height="1.5"
+          rx="0.75"
+          className="fill-slate-400"
         />
 
-        {/* Outer fingerprint arch / contour */}
+        {/* Outer biometric loop */}
         <path
-          d="M10 28C10 21.5 14.5 11 20 11C25.5 11 30 21.5 30 28"
-          className="stroke-stone-700"
+          d="M10.5 27C10.5 21 14.5 12 20 12C25.5 12 29.5 21 29.5 27"
+          className="stroke-slate-700"
           strokeWidth="1.75"
           strokeLinecap="round"
         />
 
-        {/* Middle fingerprint arch */}
+        {/* Middle biometric loop */}
         <path
-          d="M14 29C14 24 16.5 15.5 20 15.5C23.5 15.5 26 24 26 29"
-          className="stroke-stone-700"
+          d="M14 27.5C14 23 16.5 16 20 16C23.5 16 26 23 26 27.5"
+          className="stroke-slate-800"
           strokeWidth="1.75"
           strokeLinecap="round"
         />
 
-        {/* Inner biometric loop */}
+        {/* Inner biometric arch */}
         <path
-          d="M17.5 30C17.5 26.5 18.5 20 20 20C21.5 20 22.5 26.5 22.5 30"
-          className="stroke-stone-800"
+          d="M17.5 28C17.5 25 18.5 20 20 20C21.5 20 22.5 25 22.5 28"
+          className="stroke-slate-900"
           strokeWidth="1.75"
           strokeLinecap="round"
         />
 
-        {/* Central preference data node (cobalt focal point) */}
+        {/* Central preference data node */}
         <circle
           cx="20"
-          cy="24"
-          r="2.25"
-          className="fill-cobalt-600 stroke-white"
-          strokeWidth="1.2"
+          cy="25"
+          r="2.5"
+          fill="url(#nodeGrad)"
+        />
+        <circle
+          cx="20"
+          cy="25"
+          r="4.5"
+          stroke="#60A5FA"
+          strokeWidth="0.8"
+          strokeDasharray="2 2"
         />
       </svg>
 
       {showWordmark && (
-        <div className={`flex flex-col leading-none ${wordmarkClassName}`}>
+        <div className={`flex flex-col ${wordmarkClassName}`}>
           <div className="flex items-center gap-1.5">
-            <span className="font-serif font-bold text-lg tracking-tight text-stone-900">
-              PhonePrint
-            </span>
-            <span className="font-mono text-[10px] uppercase font-semibold text-cobalt-700 bg-cobalt-50 border border-cobalt-200/80 px-1.5 py-0.5 rounded">
-              Lab
+            <span className="font-heading text-base font-extrabold tracking-tight text-[#1C1B18] whitespace-nowrap">
+              Phone<span className="text-blue-700">Print</span>
             </span>
           </div>
-          <span className="font-mono text-[10px] tracking-wider uppercase text-stone-500 mt-0.5">
-            Discrete Preference Analytics
-          </span>
         </div>
       )}
     </div>

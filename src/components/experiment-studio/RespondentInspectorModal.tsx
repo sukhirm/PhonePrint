@@ -25,93 +25,81 @@ export function RespondentInspectorModal({
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-900/40 p-4 backdrop-blur-xs">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1C1B18]/50 p-4 backdrop-blur-sm animate-in fade-in duration-200">
       <div
-        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-xs border border-stone-200 bg-[#FAF9F5] p-6 shadow-xl text-stone-900 space-y-5"
+        className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl border border-[#EAE3D5] bg-[#FAF8F5] p-6 shadow-2xl text-[#1C1B18] space-y-5"
         role="dialog"
         aria-modal="true"
       >
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-stone-200 pb-4">
+        <div className="flex items-start justify-between border-b border-[#EAE3D5] pb-4">
           <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-lg font-serif font-bold text-stone-900">{title}</h3>
-              <Badge variant="cobalt" className="font-mono">
+            <div className="flex items-center gap-2.5">
+              <h3 className="text-lg font-montserrat font-bold text-[#1C1B18]">{title}</h3>
+              <Badge variant="cobalt" className="font-sora text-xs">
                 {matchingIds.length} {matchingIds.length === 1 ? "Respondent" : "Respondents"}
               </Badge>
             </div>
-            <p className="text-xs text-stone-500 mt-1">{subtitle}</p>
+            <p className="text-xs text-[#78716C] mt-1 font-sans">{subtitle}</p>
           </div>
 
           <button
             onClick={onClose}
-            className="rounded-md p-1.5 text-stone-400 hover:bg-stone-200 hover:text-stone-700 transition-all text-sm font-bold"
+            className="rounded-full h-8 w-8 flex items-center justify-center text-[#78716C] hover:bg-[#EAE3D5] hover:text-[#1C1B18] transition-all text-sm font-bold"
             aria-label="Close dialog"
           >
             ✕
           </button>
         </div>
 
-        {/* Content Table or Empty State */}
+        {/* Content Cards or Empty State */}
         {matchingRecords.length === 0 ? (
-          <div className="p-8 text-center rounded-xs border border-dashed border-stone-200 bg-white">
-            <div className="text-3xl font-serif text-stone-400 mb-1">∅</div>
-            <h4 className="text-xs font-serif font-bold text-stone-800 uppercase tracking-wider">
+          <div className="p-8 text-center rounded-2xl border border-dashed border-[#EAE3D5] bg-white">
+            <div className="text-3xl font-sora text-[#A8A29E] mb-1">∅</div>
+            <h4 className="text-xs font-montserrat font-bold text-[#1C1B18] uppercase tracking-wider">
               Empty Intersection (0 Respondents)
             </h4>
-            <p className="text-xs text-stone-500 mt-1 max-w-md mx-auto">
+            <p className="text-xs text-[#78716C] mt-1 max-w-md mx-auto font-sans">
               No survey respondents match this exact brand-feature or budget-combination conjunction in the validated dataset.
             </p>
           </div>
         ) : (
-          <div className="overflow-x-auto rounded-xs border border-stone-200 bg-white">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-[#FAF9F5] text-[11px] font-mono uppercase tracking-wider text-stone-600 border-b border-stone-200">
-                <tr>
-                  <th className="px-3.5 py-2.5">Response ID</th>
-                  <th className="px-3.5 py-2.5">Brand</th>
-                  <th className="px-3.5 py-2.5">Budget</th>
-                  <th className="px-3.5 py-2.5">Preferred Features</th>
-                  <th className="px-3.5 py-2.5">Primary Use</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-stone-100 font-medium">
-                {matchingRecords.map((r) => (
-                  <tr key={r.response_id} className="hover:bg-stone-50">
-                    <td className="px-3.5 py-2.5 font-mono font-bold text-cobalt-700">
-                      {r.response_id}
-                    </td>
-                    <td className="px-3.5 py-2.5 font-medium text-stone-800">
-                      {r.preferred_brand}
-                    </td>
-                    <td className="px-3.5 py-2.5 text-stone-600">
-                      {r.budget_range}
-                    </td>
-                    <td className="px-3.5 py-2.5">
-                      <div className="flex flex-wrap gap-1">
-                        {r.preferred_features.map((f) => (
-                          <span
-                            key={f}
-                            className="text-[10px] bg-[#FAF9F5] px-1.5 py-0.5 rounded border border-stone-200 text-stone-700"
-                          >
-                            {f}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
-                    <td className="px-3.5 py-2.5 text-stone-500 text-[11px]">
-                      {r.primary_use}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-64 overflow-y-auto pr-1">
+            {matchingRecords.map((r) => (
+              <div
+                key={r.response_id}
+                className="rounded-2xl border border-[#EAE3D5] bg-white p-4 shadow-2xs space-y-2.5"
+              >
+                <div className="flex items-center justify-between border-b border-[#EAE3D5]/60 pb-2">
+                  <span className="font-sora text-xs font-bold text-[#1C1B18] bg-[#FAF8F5] px-2.5 py-0.5 rounded-full border border-[#EAE3D5]">
+                    {r.response_id}
+                  </span>
+                  <span className="font-montserrat text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">
+                    {r.preferred_brand}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-xs text-[#78716C] font-sans">
+                  <span className="font-sora font-semibold text-[#1C1B18]">{r.budget_range}</span>
+                  <span>{r.primary_use}</span>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {r.preferred_features.map((f) => (
+                    <span
+                      key={f}
+                      className="font-sora text-[10px] font-medium text-[#1C1B18] bg-[#FAF8F5] px-2 py-0.5 rounded-md border border-[#EAE3D5]"
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         )}
 
         {/* Footer */}
-        <div className="flex justify-end pt-3 border-t border-stone-200">
-          <Button variant="outline" size="sm" onClick={onClose}>
+        <div className="flex justify-end pt-3 border-t border-[#EAE3D5]">
+          <Button variant="primary" size="sm" onClick={onClose}>
             Close Inspector
           </Button>
         </div>

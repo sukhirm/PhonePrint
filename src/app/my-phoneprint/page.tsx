@@ -37,7 +37,9 @@ export default function MyPhonePrintPage() {
 
   const toggleFeature = (feature: SmartphoneFeature) => {
     if (features.includes(feature)) {
-      setFeatures(features.filter((f) => f !== feature));
+      if (features.length > 1) {
+        setFeatures(features.filter((f) => f !== feature));
+      }
     } else {
       if (features.length < 3) {
         setFeatures([...features, feature]);
@@ -73,126 +75,64 @@ export default function MyPhonePrintPage() {
   }, [responses, brand, budget, features, isProfileComplete]);
 
   return (
-    <div className="space-y-8 pb-16">
-      {/* Page Header */}
+    <div className="space-y-12 pb-24">
+      {/* Editorial Page Header */}
       <PageHeader
         sectionCode="02"
         eyebrow="Interactive Preference Profiling"
-        title="My PhonePrint: Preference Matcher"
-        description="Select your target brand, budget tier, and exactly three canonical features to construct your personal PhonePrint vector. Computes exact set intersections and mutually exclusive partial matches against the student cohort."
+        title="My PhonePrint: Personal Vector Matcher"
+        description="Formulate your 3-dimensional smartphone phenotype: target Brand (B), Budget interval (P), and exactly three non-negotiable features (F). The matching engine computes set intersections and partitions against the 30 student benchmark."
         badge={{ text: datasetInfo.badgeText, variant: datasetInfo.isDemo ? "lime" : "cobalt" }}
         actions={
           <div className="flex items-center gap-2">
-            <span className={`font-mono text-xs font-medium px-2.5 py-1 rounded border ${
-              datasetInfo.isDemo
-                ? "text-stone-700 bg-stone-100 border-stone-200"
-                : "text-cobalt-800 bg-blue-50 border-blue-200"
-            }`}>
-              {datasetInfo.tagText}
-            </span>
             <Link href="/combolab">
               <Button variant="outline" size="sm">
                 &larr; ComboLab
+              </Button>
+            </Link>
+            <Link href="/setlab">
+              <Button variant="primary" size="sm">
+                Open SetLab &rarr;
               </Button>
             </Link>
           </div>
         }
       />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section 1: Preference Builder */}
-        <section id="builder" className="space-y-3">
-          <div className="flex items-center justify-between pb-1 border-b border-stone-200">
-            <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-stone-500">
-              1. Preference Vector Formulation
-            </h2>
-            <span className="text-xs text-stone-400 font-mono">
-              3 Dimensions: Brand • Budget • 3 Features
-            </span>
-          </div>
-          <PreferenceBuilder
-            brand={brand}
-            setBrand={setBrand}
-            budget={budget}
-            setBudget={setBudget}
-            features={features}
-            toggleFeature={toggleFeature}
-            resetPreferences={resetPreferences}
-            onApplyPreset={applyPreset}
-          />
-        </section>
+        <PreferenceBuilder
+          brand={brand}
+          setBrand={setBrand}
+          budget={budget}
+          setBudget={setBudget}
+          features={features}
+          toggleFeature={toggleFeature}
+          resetPreferences={resetPreferences}
+          onApplyPreset={applyPreset}
+        />
 
         {/* Section 2: Results Dashboard (Conditioned on complete profile) */}
         {matchResult ? (
           <>
             {/* Exact Matches */}
-            <section id="exact-matches" className="space-y-3">
-              <div className="flex items-center justify-between pb-1 border-b border-stone-200">
-                <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-stone-500">
-                  2. Exact Profile Matching
-                </h2>
-                <span className="text-xs text-stone-400 font-mono">
-                  Intersection: B ∩ P ∩ F
-                </span>
-              </div>
-              <ExactMatchCard result={matchResult} />
-            </section>
+            <ExactMatchCard result={matchResult} />
 
             {/* Mutually Exclusive Partial Match Breakdown */}
-            <section id="partial-matches" className="space-y-3">
-              <div className="flex items-center justify-between pb-1 border-b border-stone-200">
-                <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-stone-500">
-                  3. Mutually Exclusive Match Classification
-                </h2>
-                <span className="text-xs text-stone-400 font-mono">
-                  Conservation: N₃ + N₂ + N₁ + N₀ = N
-                </span>
-              </div>
-              <PartialMatchBreakdown result={matchResult} />
-            </section>
+            <PartialMatchBreakdown result={matchResult} />
 
             {/* Independent Feature Overlap */}
-            <section id="feature-overlap" className="space-y-3">
-              <div className="flex items-center justify-between pb-1 border-b border-stone-200">
-                <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-stone-500">
-                  4. Feature Triplet Overlap Analysis
-                </h2>
-                <span className="text-xs text-stone-400 font-mono">
-                  Subset Size: |F* ∩ F_i| ∈ &#123;0, 1, 2, 3&#125;
-                </span>
-              </div>
-              <FeatureOverlapCard
-                featureOverlap={matchResult.featureOverlap}
-                selectedFeatures={matchResult.profile.features}
-                totalCohort={matchResult.totalCohort}
-              />
-            </section>
-
-            {/* Respondent Explorer Table */}
-            <section id="explorer" className="space-y-3">
-              <div className="flex items-center justify-between pb-1 border-b border-stone-200">
-                <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-stone-500">
-                  5. Anonymous Respondent Explorer
-                </h2>
-                <span className="text-xs text-stone-400 font-mono">
-                  Individual Record Evaluation
-                </span>
-              </div>
-              <RespondentExplorerTable respondents={matchResult.respondents} />
-            </section>
+            <FeatureOverlapCard
+              featureOverlap={matchResult.featureOverlap}
+              selectedFeatures={matchResult.profile.features}
+              totalCohort={matchResult.totalCohort}
+            />
 
             {/* Discrete Mathematics Learning Foundation */}
-            <section id="theory" className="space-y-3">
-              <div className="flex items-center justify-between pb-1 border-b border-stone-200">
-                <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-stone-500">
-                  6. Discrete Mathematics Matching Foundation
-                </h2>
-                <span className="text-xs text-stone-400 font-mono">
-                  Formal Set Theory &amp; Partitions
-                </span>
-              </div>
-              <MatchingTheoryPanel />
-            </section>
+            <MatchingTheoryPanel />
+
+            {/* Anonymous Respondent Explorer */}
+            <RespondentExplorerTable respondents={matchResult.respondents} />
           </>
         ) : (
           <Callout
@@ -211,7 +151,7 @@ export default function MyPhonePrintPage() {
           title="PhonePrint Preference Analytics Summary"
         >
           My PhonePrint models user smartphone affinity as a discrete set
-          intersection problem over $U$. By evaluating Brand ($B$), Budget ($P$),
+          intersection problem over Universe $U$. By evaluating Brand ($B$), Budget ($P$),
           and Feature Triplet ($F$), the system demonstrates how multi-dimensional
           conjunctions partition a population into non-overlapping distance bands,
           providing mathematically rigorous insights without aggregate scalar

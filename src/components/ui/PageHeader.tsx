@@ -25,21 +25,24 @@ export function PageHeader({
 }: PageHeaderProps) {
   return (
     <div
-      className={`border-b border-stone-300/80 bg-[#FBFBF9] px-4 py-8 sm:px-6 sm:py-10 lg:px-8 relative ${className}`}
+      className={`border-b border-[#EAE3D5]/80 bg-gradient-to-b from-[#FAF7F0] via-[#FBF9F4] to-transparent px-4 py-8 sm:px-6 sm:py-10 lg:px-8 relative ${className}`}
     >
       <div className="mx-auto max-w-7xl">
-        {/* Subtle top metadata bar */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pb-4 mb-4 border-b border-stone-200/60 font-mono text-[10px] text-stone-500 uppercase tracking-widest">
-          <div className="flex items-center gap-3">
+        {/* Top metadata pill bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-[#EAE3D5]/70 font-sora text-[11px] text-stone-500">
+          <div className="flex items-center gap-2.5">
             {sectionCode && (
-              <span className="font-bold text-stone-900 bg-stone-200/80 px-2 py-0.5 rounded-xs">
-                MODULE {sectionCode}
+              <span className="font-bold text-[#1C1B18] bg-[#F5F1E8] border border-[#EAE3D5] px-2.5 py-0.5 rounded-full shadow-2xs">
+                Module {sectionCode}
               </span>
             )}
-            <span>PHONEPRINT ACADEMIC RESEARCH MONOGRAPH</span>
+            <span className="font-medium text-stone-600">
+              Discrete Mathematics &amp; Preference Dynamics
+            </span>
           </div>
-          <div className="flex items-center gap-3">
-            <span>DISCRETE MATHEMATICS &times; PREFERENCE DYNAMICS</span>
+          <div className="hidden sm:flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="font-medium text-stone-500">C(7,3) Triplet Analytics &bull; Set Theory</span>
           </div>
         </div>
 
@@ -48,8 +51,8 @@ export function PageHeader({
             {/* Eyebrow and badges */}
             <div className="flex flex-wrap items-center gap-2.5">
               {eyebrow && (
-                <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-stone-600">
-                  {"//"} {eyebrow}
+                <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white border border-[#EAE3D5] text-stone-800 font-sora text-xs font-semibold shadow-2xs">
+                  {eyebrow}
                 </span>
               )}
               {badge && (
@@ -59,14 +62,14 @@ export function PageHeader({
               )}
             </div>
 
-            {/* Editorial title */}
-            <h1 className="text-3xl font-serif font-bold tracking-tight text-stone-900 sm:text-4xl lg:text-5xl leading-tight">
+            {/* Heading in Montserrat */}
+            <h1 className="text-3xl font-heading font-extrabold tracking-tight text-[#1C1B18] sm:text-4xl lg:text-5xl leading-tight">
               {title}
             </h1>
 
-            {/* Editorial description */}
+            {/* Description in DM Sans */}
             {description && (
-              <p className="text-xs sm:text-sm text-stone-600 leading-relaxed max-w-2xl font-sans pt-1">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed max-w-2xl font-sans pt-1">
                 {description}
               </p>
             )}
@@ -99,21 +102,23 @@ export function SectionHeader({
   index,
 }: SectionHeaderProps) {
   return (
-    <div className={`flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 pb-3 border-b border-stone-300/80 ${className}`}>
+    <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#EAE3D5]/80 ${className}`}>
       <div className="space-y-0.5">
-        <div className="flex items-baseline gap-2.5">
+        <div className="flex items-center gap-2.5">
           {index && (
-            <span className="font-mono text-xs font-bold text-stone-500">
-              [{index}]
+            <span className="font-sora text-xs font-bold text-[#1C1B18] bg-[#F5F1E8] px-2.5 py-0.5 rounded-full border border-[#EAE3D5]">
+              {index}
             </span>
           )}
-          <h2 className="text-lg sm:text-xl font-serif font-bold text-stone-900 tracking-tight">
+          <h2 className="text-lg font-heading font-bold tracking-tight text-[#1C1B18]">
             {title}
           </h2>
+          {badge}
         </div>
-        {subtitle && <p className="text-xs text-stone-500 font-sans">{subtitle}</p>}
+        {subtitle && (
+          <p className="text-xs text-stone-500 font-sans">{subtitle}</p>
+        )}
       </div>
-      {badge && <div className="shrink-0">{badge}</div>}
     </div>
   );
 }

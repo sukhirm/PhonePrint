@@ -25,33 +25,33 @@ export function Badge({
   className = "",
 }: BadgeProps) {
   const variantStyles: Record<BadgeVariant, string> = {
-    default: "bg-stone-100/90 text-stone-800 border-stone-300/80",
-    cobalt: "bg-blue-50 text-blue-900 border-blue-200/90",
-    lime: "bg-lime-50 text-lime-950 border-lime-300",
-    success: "bg-emerald-50 text-emerald-950 border-emerald-300",
-    warning: "bg-amber-50 text-amber-950 border-amber-300",
-    info: "bg-blue-50 text-blue-900 border-blue-200/90",
-    outline: "bg-transparent text-stone-700 border-stone-300",
+    default: "bg-slate-100/80 text-slate-700 border-slate-200/80",
+    cobalt: "bg-blue-50/90 text-blue-700 border-blue-200/80",
+    lime: "bg-emerald-50/90 text-emerald-800 border-emerald-200/80",
+    success: "bg-emerald-50/90 text-emerald-800 border-emerald-200/80",
+    warning: "bg-amber-50/90 text-amber-800 border-amber-200/80",
+    info: "bg-sky-50/90 text-sky-800 border-sky-200/80",
+    outline: "bg-white/50 text-slate-600 border-slate-200 backdrop-blur-xs",
   };
 
   const dotColors: Record<BadgeVariant, string> = {
-    default: "bg-stone-500",
+    default: "bg-slate-400",
     cobalt: "bg-blue-600",
-    lime: "bg-lime-600",
+    lime: "bg-emerald-600",
     success: "bg-emerald-600",
     warning: "bg-amber-600",
-    info: "bg-blue-600",
-    outline: "bg-stone-500",
+    info: "bg-sky-600",
+    outline: "bg-slate-400",
   };
 
   const sizeStyles = {
-    sm: "px-2 py-0.5 text-[10px] tracking-wide",
-    md: "px-2.5 py-0.5 text-[11px] tracking-wide",
+    sm: "px-2.5 py-0.5 text-[10px]",
+    md: "px-3 py-1 text-[11px]",
   };
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-xs border font-mono font-medium uppercase leading-none shadow-none ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border font-sora font-medium leading-none backdrop-blur-md shadow-xs ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
     >
       {dot && (
         <span

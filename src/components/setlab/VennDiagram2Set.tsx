@@ -45,20 +45,26 @@ export function VennDiagram2Set({
     activeOperation === "comp_b";
 
   return (
-    <div className="relative flex flex-col items-center justify-between rounded-xl border border-slate-200/90 bg-white p-5 shadow-none text-slate-900 overflow-hidden">
+    <div className="relative flex flex-col items-center justify-between rounded-3xl border border-[#EAE3D5] bg-white p-6 shadow-xs text-[#1C1B18] overflow-hidden">
       {/* Top Banner with Set Labels */}
-      <div className="w-full flex items-center justify-between text-xs mb-3">
+      <div className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs mb-4 pb-3 border-b border-[#F5F1E8]">
         <div className="flex items-center gap-2">
-          <span className="h-3 w-3 rounded-full bg-cobalt-600" />
-          <span className="font-semibold text-slate-900 truncate max-w-[200px]" title={setAName}>
+          <span className="h-3 w-3 rounded-full bg-blue-600 shadow-xs" />
+          <span className="font-montserrat font-bold text-[#1C1B18] text-xs truncate max-w-[220px]" title={setAName}>
             Set A: {setAName}
+          </span>
+          <span className="font-sora text-[11px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
+            n = {regions.onlyA.size + regions.both.size}
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="font-semibold text-slate-900 truncate max-w-[200px]" title={setBName}>
+          <span className="font-sora text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            n = {regions.onlyB.size + regions.both.size}
+          </span>
+          <span className="font-montserrat font-bold text-[#1C1B18] text-xs truncate max-w-[220px]" title={setBName}>
             Set B: {setBName}
           </span>
-          <span className="h-3 w-3 rounded-full bg-lime-500" />
+          <span className="h-3 w-3 rounded-full bg-emerald-500 shadow-xs" />
         </div>
       </div>
 
@@ -70,27 +76,17 @@ export function VennDiagram2Set({
           role="img"
           aria-label="Two-set Venn diagram representing Set A and Set B"
         >
-          <defs>
-            {/* Subtle drop shadows for interactive hover */}
-            <filter id="venn-glow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="2" stdDeviation="4" floodColor="#2563eb" floodOpacity="0.3" />
-            </filter>
-            <filter id="lime-glow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="2" stdDeviation="4" floodColor="#84cc16" floodOpacity="0.4" />
-            </filter>
-          </defs>
-
           {/* Universal Set Bounding Rectangle */}
           <rect
             x="8"
             y="8"
             width="524"
             height="304"
-            rx="12"
-            fill={isNeitherActive ? "#f1f5f9" : "#fafafa"}
-            stroke={isNeitherActive ? "#2563eb" : "#e2e8f0"}
+            rx="20"
+            fill={isNeitherActive ? "#F5F1E8" : "#FAF8F5"}
+            stroke={isNeitherActive ? "#1C1B18" : "#EAE3D5"}
             strokeWidth={isNeitherActive ? "2" : "1.5"}
-            strokeDasharray={isNeitherActive ? "none" : "4 4"}
+            strokeDasharray={isNeitherActive ? "none" : "5 5"}
             className="transition-colors cursor-pointer"
             onClick={() => onSelectRegion("neither")}
             onMouseEnter={() => setHoveredRegion("neither")}
@@ -101,12 +97,12 @@ export function VennDiagram2Set({
           <text
             x="24"
             y="32"
-            fill="#64748b"
+            fill="#78716C"
             fontSize="11"
-            fontFamily="monospace"
+            fontFamily="Sora, sans-serif"
             fontWeight="600"
           >
-            Universal Set U (n={regions.universeSet.size})
+            Universal Set U (N = {regions.universeSet.size})
           </text>
 
           {/* Outside Region (Neither) Button Indicator */}
@@ -117,23 +113,23 @@ export function VennDiagram2Set({
             onMouseLeave={() => setHoveredRegion(null)}
           >
             <rect
-              x="380"
-              y="18"
-              width="140"
-              height="26"
-              rx="6"
-              fill={isNeitherActive ? "#2563eb" : "#ffffff"}
-              stroke={isNeitherActive ? "#1d4ed8" : "#cbd5e1"}
-              strokeWidth="1"
+              x="360"
+              y="16"
+              width="160"
+              height="28"
+              rx="14"
+              fill={isNeitherActive ? "#1C1B18" : "#FFFFFF"}
+              stroke={isNeitherActive ? "#1C1B18" : "#EAE3D5"}
+              strokeWidth="1.5"
             />
             <text
-              x="450"
-              y="35"
+              x="440"
+              y="34"
               textAnchor="middle"
-              fill={isNeitherActive ? "#ffffff" : "#475569"}
+              fill={isNeitherActive ? "#FFFFFF" : "#57534E"}
               fontSize="11"
               fontWeight="600"
-              fontFamily="monospace"
+              fontFamily="Sora, sans-serif"
             >
               (A ∪ B)ᶜ : n={regions.neither.size}
             </text>
@@ -147,13 +143,13 @@ export function VennDiagram2Set({
             d="M 270,81.74 A 105,105 0 1,0 270,238.26 A 105,105 0 0,0 270,81.74 Z"
             fill={
               isOnlyAActive
-                ? "#2563eb"
+                ? "#2563EB"
                 : hoveredRegion === "onlyA"
-                ? "#93c5fd"
-                : "#dbeafe"
+                ? "#93C5FD"
+                : "#DBEAFE"
             }
-            fillOpacity={isOnlyAActive ? 0.85 : 0.45}
-            stroke={isOnlyAActive ? "#1d4ed8" : "#3b82f6"}
+            fillOpacity={isOnlyAActive ? 0.9 : 0.55}
+            stroke={isOnlyAActive ? "#1D4ED8" : "#3B82F6"}
             strokeWidth={isOnlyAActive ? 3 : 1.5}
             className="transition-all cursor-pointer hover:opacity-95"
             onClick={() => onSelectRegion("diff_ab")}
@@ -168,13 +164,13 @@ export function VennDiagram2Set({
             d="M 270,81.74 A 105,105 0 1,1 270,238.26 A 105,105 0 0,0 270,81.74 Z"
             fill={
               isOnlyBActive
-                ? "#84cc16"
+                ? "#059669"
                 : hoveredRegion === "onlyB"
-                ? "#bef264"
-                : "#d9f99d"
+                ? "#86EFAC"
+                : "#D1FAE5"
             }
-            fillOpacity={isOnlyBActive ? 0.85 : 0.45}
-            stroke={isOnlyBActive ? "#4d7c0f" : "#65a30d"}
+            fillOpacity={isOnlyBActive ? 0.9 : 0.55}
+            stroke={isOnlyBActive ? "#047857" : "#10B981"}
             strokeWidth={isOnlyBActive ? 3 : 1.5}
             className="transition-all cursor-pointer hover:opacity-95"
             onClick={() => onSelectRegion("diff_ba")}
@@ -189,13 +185,13 @@ export function VennDiagram2Set({
             d="M 270,81.74 A 105,105 0 0,1 270,238.26 A 105,105 0 0,1 270,81.74 Z"
             fill={
               isBothActive
-                ? "#3b82f6"
+                ? "#4F46E5"
                 : hoveredRegion === "both"
-                ? "#a7f3d0"
-                : "#bfdbfe"
+                ? "#A5B4FC"
+                : "#C7D2FE"
             }
             fillOpacity={isBothActive ? 0.95 : 0.65}
-            stroke={isBothActive ? "#1e40af" : "#2563eb"}
+            stroke={isBothActive ? "#3730A3" : "#6366F1"}
             strokeWidth={isBothActive ? 3 : 1.5}
             className="transition-all cursor-pointer hover:opacity-95"
             onClick={() => onSelectRegion("intersection")}
@@ -212,29 +208,31 @@ export function VennDiagram2Set({
           >
             <text
               textAnchor="middle"
-              y="-10"
+              y="-12"
               fontSize="12"
-              fontWeight="bold"
-              fill={isOnlyAActive ? "#ffffff" : "#1e40af"}
+              fontFamily="Montserrat, sans-serif"
+              fontWeight="700"
+              fill={isOnlyAActive ? "#FFFFFF" : "#1E3A8A"}
             >
               A only
             </text>
             <text
               textAnchor="middle"
               y="12"
-              fontSize="18"
-              fontWeight="bold"
-              fontFamily="monospace"
-              fill={isOnlyAActive ? "#ffffff" : "#0f172a"}
+              fontSize="20"
+              fontFamily="Sora, sans-serif"
+              fontWeight="800"
+              fill={isOnlyAActive ? "#FFFFFF" : "#0F172A"}
             >
               n = {regions.onlyA.size}
             </text>
             <text
               textAnchor="middle"
               y="28"
-              fontSize="10"
-              fontWeight="500"
-              fill={isOnlyAActive ? "#eff6ff" : "#475569"}
+              fontSize="11"
+              fontFamily="Sora, sans-serif"
+              fontWeight="600"
+              fill={isOnlyAActive ? "#DBEAFE" : "#3B82F6"}
             >
               A \ B
             </text>
@@ -247,29 +245,31 @@ export function VennDiagram2Set({
           >
             <text
               textAnchor="middle"
-              y="-12"
-              fontSize="11"
-              fontWeight="bold"
-              fill={isBothActive ? "#ffffff" : "#1e3a8a"}
+              y="-14"
+              fontSize="12"
+              fontFamily="Montserrat, sans-serif"
+              fontWeight="700"
+              fill={isBothActive ? "#FFFFFF" : "#312E81"}
             >
-              Both
+              Shared Overlap
             </text>
             <text
               textAnchor="middle"
               y="12"
-              fontSize="20"
-              fontWeight="bold"
-              fontFamily="monospace"
-              fill={isBothActive ? "#ffffff" : "#0f172a"}
+              fontSize="22"
+              fontFamily="Sora, sans-serif"
+              fontWeight="800"
+              fill={isBothActive ? "#FFFFFF" : "#0F172A"}
             >
               n = {regions.both.size}
             </text>
             <text
               textAnchor="middle"
-              y="28"
-              fontSize="10"
-              fontWeight="500"
-              fill={isBothActive ? "#eff6ff" : "#1e40af"}
+              y="30"
+              fontSize="11"
+              fontFamily="Sora, sans-serif"
+              fontWeight="600"
+              fill={isBothActive ? "#E0E7FF" : "#4338CA"}
             >
               A ∩ B
             </text>
@@ -282,29 +282,31 @@ export function VennDiagram2Set({
           >
             <text
               textAnchor="middle"
-              y="-10"
+              y="-12"
               fontSize="12"
-              fontWeight="bold"
-              fill={isOnlyBActive ? "#ffffff" : "#365314"}
+              fontFamily="Montserrat, sans-serif"
+              fontWeight="700"
+              fill={isOnlyBActive ? "#FFFFFF" : "#064E3B"}
             >
               B only
             </text>
             <text
               textAnchor="middle"
               y="12"
-              fontSize="18"
-              fontWeight="bold"
-              fontFamily="monospace"
-              fill={isOnlyBActive ? "#ffffff" : "#0f172a"}
+              fontSize="20"
+              fontFamily="Sora, sans-serif"
+              fontWeight="800"
+              fill={isOnlyBActive ? "#FFFFFF" : "#0F172A"}
             >
               n = {regions.onlyB.size}
             </text>
             <text
               textAnchor="middle"
               y="28"
-              fontSize="10"
-              fontWeight="500"
-              fill={isOnlyBActive ? "#eff6ff" : "#3f6212"}
+              fontSize="11"
+              fontFamily="Sora, sans-serif"
+              fontWeight="600"
+              fill={isOnlyBActive ? "#D1FAE5" : "#059669"}
             >
               B \ A
             </text>
@@ -313,10 +315,10 @@ export function VennDiagram2Set({
       </div>
 
       {/* Interactive Helper Text */}
-      <div className="w-full mt-3 flex items-center justify-between text-[11px] text-slate-500 border-t border-slate-100 pt-3">
-        <span>Click any Venn region to inspect its matching respondent IDs</span>
-        <span className="font-mono text-slate-600">
-          |A ∪ B| = {regions.unionSet.size} of {regions.universeSet.size}
+      <div className="w-full mt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#78716C] border-t border-[#F5F1E8] pt-3">
+        <span className="font-sans font-medium">Click any Venn region to inspect its matching student respondents</span>
+        <span className="font-sora font-semibold text-[#1C1B18] bg-[#FAF8F5] px-2.5 py-1 rounded-full border border-[#EAE3D5]">
+          |A ∪ B| = {regions.unionSet.size} of {regions.universeSet.size} students
         </span>
       </div>
     </div>

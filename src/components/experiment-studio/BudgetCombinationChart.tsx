@@ -84,21 +84,21 @@ export function BudgetCombinationChart({
                 data={chartData}
                 margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
               >
-                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#e7e5e4" />
+                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#EAE3D5" />
                 <XAxis
                   type="number"
                   domain={[0, "dataMax + 1"]}
                   allowDecimals={false}
-                  tick={{ fontSize: 11, fill: "#78716c" }}
-                  axisLine={{ stroke: "#d6d3d1" }}
+                  tick={{ fontSize: 11, fill: "#78716C", fontFamily: "Sora, sans-serif" }}
+                  axisLine={{ stroke: "#EAE3D5" }}
                   tickLine={false}
                 />
                 <YAxis
                   type="category"
                   dataKey="label"
-                  width={190}
-                  tick={{ fontSize: 11, fill: "#292524" }}
-                  axisLine={{ stroke: "#d6d3d1" }}
+                  width={200}
+                  tick={{ fontSize: 11, fill: "#1C1B18", fontFamily: "Sora, sans-serif", fontWeight: 600 }}
+                  axisLine={{ stroke: "#EAE3D5" }}
                   tickLine={false}
                 />
                 <Tooltip
@@ -106,14 +106,14 @@ export function BudgetCombinationChart({
                     if (active && payload && payload.length) {
                       const item = chartData.find((d) => d.label === label);
                       return (
-                        <div className="rounded-xs border border-stone-200 bg-white p-3 shadow-lg text-xs space-y-1.5 min-w-48">
-                          <div className="font-mono font-bold text-stone-900 border-b border-stone-200/80 pb-1">
+                        <div className="rounded-2xl border border-[#EAE3D5] bg-white p-3.5 shadow-xl text-xs space-y-1.5 min-w-56 font-sans">
+                          <div className="font-sora font-bold text-[#1C1B18] border-b border-[#F5F1E8] pb-1.5 text-sm">
                             {item?.combinationId}
                           </div>
-                          <div className="text-[11px] text-stone-600">
+                          <div className="text-xs text-[#57534E]">
                             {item?.features}
                           </div>
-                          <div className="space-y-1 pt-1">
+                          <div className="space-y-1.5 pt-1.5">
                             {payload.map((entry) => {
                               const budgetName = entry.dataKey
                                 ? String(entry.dataKey).replace("_count", "")
@@ -125,16 +125,16 @@ export function BudgetCombinationChart({
                               return (
                                 <div
                                   key={entry.name}
-                                  className="flex items-center justify-between gap-3 text-[11px]"
+                                  className="flex items-center justify-between gap-3 text-xs"
                                 >
-                                  <span className="flex items-center gap-1.5 font-medium text-stone-700">
+                                  <span className="flex items-center gap-1.5 font-medium text-[#57534E]">
                                     <span
-                                      className="h-2 w-2 rounded-full"
+                                      className="h-2.5 w-2.5 rounded-full"
                                       style={{ backgroundColor: entry.color }}
                                     />
                                     {budgetName}:
                                   </span>
-                                  <span className="font-mono font-bold text-stone-900">
+                                  <span className="font-sora font-extrabold text-[#1C1B18]">
                                     {count} resp. ({pct}% of {n_p})
                                   </span>
                                 </div>
@@ -150,7 +150,7 @@ export function BudgetCombinationChart({
                 <Legend
                   verticalAlign="top"
                   align="right"
-                  wrapperStyle={{ paddingBottom: 10, fontSize: 12 }}
+                  wrapperStyle={{ paddingBottom: 12, fontSize: 11, fontFamily: "Sora, sans-serif" }}
                   formatter={(value) => value.replace("_count", "")}
                 />
                 {selectedBudgets.map((budget) => (
@@ -159,7 +159,7 @@ export function BudgetCombinationChart({
                     dataKey={`${budget}_count`}
                     name={budget}
                     fill={BUDGET_PALETTE[budget] ?? "#78716c"}
-                    radius={[0, 4, 4, 0]}
+                    radius={[0, 6, 6, 0]}
                     maxBarSize={18}
                     onClick={(entry) => {
                       const found = activeRows.find(

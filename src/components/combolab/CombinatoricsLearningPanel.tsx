@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card, CardHeader, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { KaTeXMath } from "@/components/ui/KaTeXMath";
 
@@ -105,96 +104,104 @@ export function CombinatoricsLearningPanel() {
   const activeTopic = TOPICS.find((t) => t.id === selectedTopicId) ?? TOPICS[0]!;
 
   return (
-    <Card>
-      <CardHeader
-        title="Discrete Mathematics Learning Foundation"
-        subtitle="Undergraduate curriculum reference for counting principles, factorials, and binomial coefficients"
-        badge={<Badge variant="cobalt">Educational Reference</Badge>}
-      />
-      <CardContent className="space-y-6">
-        {/* Topic navigation tabs */}
-        <div className="flex flex-wrap gap-2 border-b border-stone-200 pb-3">
-          {TOPICS.map((topic) => {
-            const isActive = topic.id === selectedTopicId;
-            return (
-              <button
-                key={topic.id}
-                onClick={() => setSelectedTopicId(topic.id)}
-                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                  isActive
-                    ? "bg-stone-900 text-white shadow-none"
-                    : "bg-[#FAF9F5] hover:bg-stone-100 text-stone-700 border border-stone-200"
-                }`}
-              >
-                {topic.title.split(" (")[0]}
-              </button>
-            );
-          })}
+    <div className="rounded-3xl border border-[#EAE3D5] bg-white p-6 shadow-xs text-[#1C1B18] space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#F5F1E8] pb-4">
+        <div>
+          <div className="flex items-center gap-2.5">
+            <h3 className="text-base font-montserrat font-bold tracking-tight text-[#1C1B18]">
+              Discrete Mathematics Learning Foundation
+            </h3>
+            <Badge variant="cobalt">Educational Reference</Badge>
+          </div>
+          <p className="text-xs text-[#78716C] mt-1 font-sans">
+            Undergraduate curriculum reference for counting principles, factorials, and binomial coefficients
+          </p>
         </div>
+      </div>
 
-        {/* Active Topic Content */}
-        <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div>
-              <h3 className="text-base font-serif font-bold text-stone-900">
-                {activeTopic.title}
-              </h3>
-              <p className="text-xs text-stone-500">{activeTopic.subtitle}</p>
-            </div>
-            <Badge variant="lime" className="font-mono text-xs">
-              {activeTopic.badge}
-            </Badge>
-          </div>
+      {/* Topic navigation tabs */}
+      <div className="flex flex-wrap gap-2">
+        {TOPICS.map((topic) => {
+          const isActive = topic.id === selectedTopicId;
+          return (
+            <button
+              key={topic.id}
+              onClick={() => setSelectedTopicId(topic.id)}
+              className={`px-4 py-2 rounded-full text-xs font-sora transition-all ${
+                isActive
+                  ? "bg-[#1C1B18] text-white shadow-xs font-bold"
+                  : "bg-[#FAF8F5] hover:bg-[#F5F1E8] text-[#57534E] border border-[#EAE3D5] font-medium"
+              }`}
+            >
+              {topic.title.split(" (")[0]}
+            </button>
+          );
+        })}
+      </div>
 
-          {/* Mathematical Formula Card */}
-          <div className="rounded-xs border border-stone-200 bg-[#FAF9F5] p-4">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-stone-500 block mb-1">
-              Formal Mathematical Definition:
-            </span>
-            <KaTeXMath
-              math={activeTopic.formula}
-              block
-              className="text-stone-900 text-sm font-semibold"
-            />
-          </div>
-
-          {/* Conceptual Explanation */}
-          <div className="text-xs text-stone-700 leading-relaxed space-y-2">
-            <h4 className="font-mono text-stone-900 text-xs uppercase tracking-wider">
-              Core Concept:
-            </h4>
-            <p>{activeTopic.explanation}</p>
-          </div>
-
-          {/* PhonePrint Application Context */}
-          <div className="rounded-xs border border-stone-200 bg-white p-4 text-xs space-y-1.5">
-            <span className="font-mono text-lime-900 uppercase tracking-wider text-[11px] block font-bold">
-              Application to PhonePrint Research:
-            </span>
-            <p className="text-stone-700 leading-relaxed">
-              {activeTopic.phoneprintApplication}
-            </p>
-          </div>
-
-          {/* Mathematical Properties */}
+      {/* Active Topic Content */}
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#F5F1E8] pb-3">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-stone-500 block mb-2">
-              Key Mathematical Properties:
-            </span>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-              {activeTopic.properties.map((prop, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-md border border-stone-200 bg-[#FAF9F5] p-2.5 text-xs font-medium text-stone-800 shadow-none"
-                >
-                  <span className="text-cobalt-600 font-bold mr-1">&bull;</span>
-                  {prop}
-                </div>
-              ))}
-            </div>
+            <h3 className="text-base font-montserrat font-bold text-[#1C1B18]">
+              {activeTopic.title}
+            </h3>
+            <p className="text-xs text-[#78716C] font-sans mt-0.5">{activeTopic.subtitle}</p>
+          </div>
+          <Badge variant="lime" className="font-sora text-xs">
+            {activeTopic.badge}
+          </Badge>
+        </div>
+
+        {/* Mathematical Formula Card */}
+        <div className="rounded-2xl border border-[#EAE3D5] bg-[#FAF8F5] p-5">
+          <span className="text-[11px] font-sora font-semibold uppercase tracking-wider text-[#78716C] block mb-2">
+            Formal Mathematical Definition:
+          </span>
+          <KaTeXMath
+            math={activeTopic.formula}
+            block
+            className="text-[#1C1B18] text-sm sm:text-base font-semibold"
+          />
+        </div>
+
+        {/* Conceptual Explanation */}
+        <div className="text-xs text-[#57534E] leading-relaxed space-y-1.5 font-sans">
+          <h4 className="font-montserrat font-bold text-[#1C1B18] text-xs uppercase tracking-wider">
+            Core Concept:
+          </h4>
+          <p>{activeTopic.explanation}</p>
+        </div>
+
+        {/* PhonePrint Application Context */}
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50/30 p-5 text-xs space-y-2">
+          <span className="font-sora text-emerald-900 uppercase tracking-wider text-[11px] block font-bold">
+            Application to PhonePrint Research:
+          </span>
+          <p className="text-emerald-950 leading-relaxed font-sans">
+            {activeTopic.phoneprintApplication}
+          </p>
+        </div>
+
+        {/* Mathematical Properties */}
+        <div className="space-y-2">
+          <span className="text-[11px] font-sora font-semibold uppercase tracking-wider text-[#78716C] block">
+            Key Mathematical Properties:
+          </span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+            {activeTopic.properties.map((prop, idx) => (
+              <div
+                key={idx}
+                className="rounded-xl border border-[#EAE3D5] bg-[#FAF8F5] p-3 text-xs font-sora font-medium text-[#1C1B18] shadow-2xs"
+              >
+                <span className="text-blue-600 font-bold mr-1.5">&bull;</span>
+                {prop}
+              </div>
+            ))}
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

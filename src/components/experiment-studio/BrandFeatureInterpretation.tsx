@@ -26,39 +26,39 @@ export function BrandFeatureInterpretation({
       <CardContent className="space-y-6">
         {/* Hypothesis Framing */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-4 rounded-xs border border-stone-200 bg-[#FAF9F5] space-y-2">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-stone-500 block">
+          <div className="p-4.5 rounded-2xl border border-[#EAE3D5] bg-[#FAF8F5] space-y-2">
+            <span className="text-[11px] font-sora font-semibold uppercase tracking-wider text-[#78716C] block">
               Descriptive Null Hypothesis (H₀)
             </span>
-            <p className="text-xs text-stone-700 leading-relaxed font-medium">
+            <p className="text-xs text-[#57534E] leading-relaxed font-sans">
               Feature preference distributions are identical across the selected brand groups:
             </p>
             <KaTeXMath
               math="H_0: P(f \mid b_i) = P(f \mid b_j) \quad \forall f \in \text{Features}, \quad \forall i, j"
               block
-              className="text-xs text-stone-900 font-semibold"
+              className="text-xs text-[#1C1B18] font-semibold"
             />
           </div>
 
-          <div className="p-4 rounded-xs border border-stone-200 bg-white space-y-2">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-cobalt-800 block">
+          <div className="p-4.5 rounded-2xl border border-[#EAE3D5] bg-white space-y-2">
+            <span className="text-[11px] font-sora font-semibold uppercase tracking-wider text-blue-700 block">
               Descriptive Alternative Hypothesis (H₁)
             </span>
-            <p className="text-xs text-stone-700 leading-relaxed font-medium">
+            <p className="text-xs text-[#57534E] leading-relaxed font-sans">
               Feature preference distributions differ across the selected brand groups:
             </p>
             <KaTeXMath
               math="H_1: \exists f \in \text{Features}, \exists i, j \text{ such that } P(f \mid b_i) \neq P(f \mid b_j)"
               block
-              className="text-xs text-cobalt-950 font-semibold"
+              className="text-xs text-blue-950 font-semibold"
             />
           </div>
         </div>
 
         {/* Dynamically Generated Descriptive Findings */}
-        <div className="rounded-xs border border-stone-200 bg-[#FAF9F5] p-4 space-y-3">
+        <div className="rounded-2xl border border-[#EAE3D5] bg-[#FAF8F5] p-5 space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono uppercase tracking-wider text-stone-800 block">
+            <span className="text-xs font-montserrat font-bold uppercase tracking-wider text-[#1C1B18] block">
               Observed Descriptive Associations
             </span>
             <Badge variant="lime">
@@ -67,13 +67,13 @@ export function BrandFeatureInterpretation({
           </div>
 
           {descriptiveNotes.length > 0 ? (
-            <ul className="space-y-2 text-xs text-stone-700">
+            <ul className="space-y-2 text-xs text-[#57534E]">
               {descriptiveNotes.map((note, index) => (
                 <li
                   key={index}
-                  className="rounded-md bg-white p-2.5 border border-stone-200 shadow-none flex items-start gap-2"
+                  className="rounded-xl bg-white p-3 border border-[#EAE3D5] shadow-2xs flex items-start gap-2.5 font-sans"
                 >
-                  <span className="text-cobalt-600 font-bold mr-0.5">&bull;</span>
+                  <span className="text-blue-600 font-bold mr-0.5">&bull;</span>
                   <span className="leading-relaxed">{note}</span>
                 </li>
               ))}

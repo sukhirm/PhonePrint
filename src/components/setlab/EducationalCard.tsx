@@ -58,95 +58,95 @@ const DEFINITIONS: Record<ActiveOperation, (a: string, b: string, c?: string) =>
     plainEnglish: `Contains all respondents in the university cohort who did NOT select ${a}. The complement is always defined relative to the universal set U.`,
     properties: ["Double Complement: (Aᶜ)ᶜ = A", "Complementarity: A ∪ Aᶜ = U and A ∩ Aᶜ = ∅", "De Morgan: (A ∪ B)ᶜ = Aᶜ ∩ Bᶜ"],
   }),
-  comp_b: (_a, b) => ({
+  comp_b: (_, b) => ({
     title: "Absolute Complement (Bᶜ)",
     math: "B^c = U \\setminus B = \\{ x \\in U \\mid x \\notin B \\}",
-    plainEnglish: `Contains all respondents in the cohort who did NOT select ${b}.`,
+    plainEnglish: `Contains all respondents in the university cohort who did NOT select ${b}.`,
     properties: ["Double Complement: (Bᶜ)ᶜ = B", "Complementarity: B ∪ Bᶜ = U and B ∩ Bᶜ = ∅", "De Morgan: (A ∩ B)ᶜ = Aᶜ ∪ Bᶜ"],
   }),
   neither: (a, b) => ({
-    title: "Neither Set / Complement of Union",
-    math: "(A \\cup B)^c = U \\setminus (A \\cup B) = A^c \\cap B^c",
-    plainEnglish: `Contains respondents who chose neither ${a} nor ${b}. By De Morgan's Law, this region is identical to the intersection of their individual complements.`,
-    properties: ["De Morgan's First Law: (A ∪ B)ᶜ = Aᶜ ∩ Bᶜ", "Cardinality: |(A ∪ B)ᶜ| = |U| - |A ∪ B|", "Exterior Venn region"],
+    title: "Neither Set ((A ∪ B)ᶜ)",
+    math: "(A \\cup B)^c = A^c \\cap B^c = \\{ x \\in U \\mid x \\notin A \\land x \\notin B \\}",
+    plainEnglish: `Contains all respondents who selected NEITHER ${a} NOR ${b}. Directly proves De Morgan's First Law.`,
+    properties: ["De Morgan: (A ∪ B)ᶜ = Aᶜ ∩ Bᶜ", "Disjoint from A and from B", "Union with (A ∪ B) equals universal set U"],
   }),
   subset_ab: (a, b) => ({
     title: "Subset Inclusion Predicate (A ⊆ B)",
-    math: "A \\subseteq B \\iff \\forall x \\in U \\, (x \\in A \\implies x \\in B) \\iff A \\setminus B = \\emptyset",
-    plainEnglish: `Tests whether every respondent who selected ${a} also selected ${b}. In discrete data, A ⊆ B holds if and only if the difference set A \\ B is empty.`,
+    math: "A \\subseteq B \\iff \\forall x \\in U, (x \\in A \\implies x \\in B)",
+    plainEnglish: `Tests whether every respondent who chose ${a} also chose ${b}. If false, the displayed respondents represent counterexample elements belonging to A \\ B.`,
     properties: ["Reflexive: A ⊆ A", "Antisymmetric: (A ⊆ B ∧ B ⊆ A) ⟹ A = B", "Transitive: (A ⊆ B ∧ B ⊆ C) ⟹ A ⊆ C"],
   }),
   disjoint_ab: (a, b) => ({
-    title: "Set Disjointness Predicate (A ∩ B = ∅)",
-    math: "A \\text{ and } B \\text{ disjoint} \\iff A \\cap B = \\emptyset \\iff |A \\cup B| = |A| + |B|",
-    plainEnglish: `Tests whether cohorts ${a} and ${b} are completely mutually exclusive. When two sets are disjoint, their union cardinality equals the simple sum of their individual sizes.`,
-    properties: ["No shared elements", "Simplified PIE: |A ∪ B| = |A| + |B|", "Empty intersection: |A ∩ B| = 0"],
+    title: "Disjointness Predicate (A ∩ B = ∅)",
+    math: "A \\text{ and } B \\text{ are disjoint} \\iff A \\cap B = \\emptyset",
+    plainEnglish: `Evaluates whether cohorts ${a} and ${b} have zero shared respondents. If true, the intersection cardinality is strictly zero.`,
+    properties: ["Mutual exclusion: |A ∪ B| = |A| + |B|", "Zero intersection: |A ∩ B| = 0", "Difference equals original: A \\ B = A"],
   }),
   union_abc: (a, b, c) => ({
     title: "Triple Union (A ∪ B ∪ C)",
     math: "A \\cup B \\cup C = \\{ x \\in U \\mid x \\in A \\lor x \\in B \\lor x \\in C \\}",
-    plainEnglish: `Contains respondents who selected at least one of ${a}, ${b}, or ${c || "Set C"}.`,
-    properties: ["Associative & Commutative", "Evaluated via 3-Set PIE", "Conserves individual set elements"],
+    plainEnglish: `Contains respondents who chose at least one of ${a}, ${b}, or ${c || "Set C"}.`,
+    properties: ["Inclusion-Exclusion Theorem domain", "Associative and Commutative", "Contains all 7 internal Venn regions"],
   }),
   inter_abc: (a, b, c) => ({
     title: "Triple Intersection (A ∩ B ∩ C)",
     math: "A \\cap B \\cap C = \\{ x \\in U \\mid x \\in A \\land x \\in B \\land x \\in C \\}",
-    plainEnglish: `Contains strictly respondents who simultaneously chose all three: ${a}, ${b}, AND ${c || "Set C"}. Represents the central core region in a 3-set Venn diagram.`,
-    properties: ["Central Venn region", "Highest constraint specificity", "Subset of all pairwise intersections"],
+    plainEnglish: `Contains respondents who simultaneously selected ALL THREE: ${a}, ${b}, and ${c || "Set C"}.`,
+    properties: ["Core intersection region", "Highest constraint specificity", "Dominated by smallest component set"],
   }),
   inter_ab: (a, b) => ({
-    title: "Pairwise Intersection: A ∩ B",
+    title: "Pairwise Intersection (A ∩ B)",
     math: "A \\cap B = \\{ x \\in U \\mid x \\in A \\land x \\in B \\}",
-    plainEnglish: `Contains respondents who selected both ${a} and ${b}, regardless of their choice for Set C.`,
-    properties: ["Includes central triple intersection", "Subtracted in 3-set PIE step 2", "Pairwise overlap cohort"],
+    plainEnglish: `Contains respondents who selected both ${a} and ${b}, regardless of set C.`,
+    properties: ["Equals (A ∩ B ∩ C) ∪ ((A ∩ B) \\ C)", "Pairwise PIE term", "Upper bound: min(|A|, |B|)"],
   }),
-  inter_ac: (a, _b, c) => ({
-    title: "Pairwise Intersection: A ∩ C",
+  inter_ac: (a, _, c) => ({
+    title: "Pairwise Intersection (A ∩ C)",
     math: "A \\cap C = \\{ x \\in U \\mid x \\in A \\land x \\in C \\}",
-    plainEnglish: `Contains respondents who selected both ${a} and ${c || "Set C"}, regardless of their choice for Set B.`,
-    properties: ["Includes central triple intersection", "Subtracted in 3-set PIE step 2", "Pairwise overlap cohort"],
+    plainEnglish: `Contains respondents who selected both ${a} and ${c || "Set C"}.`,
+    properties: ["Pairwise PIE term", "Independent of B", "Upper bound: min(|A|, |C|)"],
   }),
-  inter_bc: (_a, b, c) => ({
-    title: "Pairwise Intersection: B ∩ C",
+  inter_bc: (_, b, c) => ({
+    title: "Pairwise Intersection (B ∩ C)",
     math: "B \\cap C = \\{ x \\in U \\mid x \\in B \\land x \\in C \\}",
-    plainEnglish: `Contains respondents who selected both ${b} and ${c || "Set C"}, regardless of their choice for Set A.`,
-    properties: ["Includes central triple intersection", "Subtracted in 3-set PIE step 2", "Pairwise overlap cohort"],
+    plainEnglish: `Contains respondents who selected both ${b} and ${c || "Set C"}.`,
+    properties: ["Pairwise PIE term", "Independent of A", "Upper bound: min(|B|, |C|)"],
   }),
   only_a: (a) => ({
     title: "Region 1: A Only",
     math: "A \\setminus (B \\cup C) = A \\cap B^c \\cap C^c",
-    plainEnglish: `Contains respondents who chose ${a}, but chose NEITHER Set B NOR Set C.`,
-    properties: ["Disjoint from B and C", "1 of the 8 canonical Venn regions", "Pure single-trait cohort"],
+    plainEnglish: `Contains respondents who selected ${a}, but neither of the other two sets.`,
+    properties: ["Mutually disjoint from all other 6 regions", "Pure A cohort isolate", "Partition component"],
   }),
-  only_b: (_a, b) => ({
+  only_b: (_, b) => ({
     title: "Region 2: B Only",
     math: "B \\setminus (A \\cup C) = B \\cap A^c \\cap C^c",
-    plainEnglish: `Contains respondents who chose ${b}, but chose NEITHER Set A NOR Set C.`,
-    properties: ["Disjoint from A and C", "1 of the 8 canonical Venn regions", "Pure single-trait cohort"],
+    plainEnglish: `Contains respondents who selected ${b}, but neither of the other two sets.`,
+    properties: ["Mutually disjoint from all other 6 regions", "Pure B cohort isolate", "Partition component"],
   }),
   only_c: (_a, _b, c) => ({
     title: "Region 3: C Only",
     math: "C \\setminus (A \\cup B) = C \\cap A^c \\cap B^c",
-    plainEnglish: `Contains respondents who chose ${c || "Set C"}, but chose NEITHER Set A NOR Set B.`,
-    properties: ["Disjoint from A and B", "1 of the 8 canonical Venn regions", "Pure single-trait cohort"],
+    plainEnglish: `Contains respondents who selected ${c || "Set C"}, but neither of the other two sets.`,
+    properties: ["Mutually disjoint from all other 6 regions", "Pure C cohort isolate", "Partition component"],
   }),
   only_ab: (a, b) => ({
     title: "Region 4: AB Only",
     math: "(A \\cap B) \\setminus C = A \\cap B \\cap C^c",
-    plainEnglish: `Contains respondents who chose both ${a} and ${b}, but specifically did NOT choose Set C.`,
-    properties: ["2-trait specific overlap", "Disjoint from triple intersection", "1 of the 8 canonical Venn regions"],
+    plainEnglish: `Contains respondents who selected both ${a} and ${b}, but explicitly excluded Set C.`,
+    properties: ["Exact 2-way intersection", "Disjoint from triple intersection", "Partition component"],
   }),
   only_ac: (a, _b, c) => ({
     title: "Region 5: AC Only",
     math: "(A \\cap C) \\setminus B = A \\cap C \\cap B^c",
-    plainEnglish: `Contains respondents who chose both ${a} and ${c || "Set C"}, but specifically did NOT choose Set B.`,
-    properties: ["2-trait specific overlap", "Disjoint from triple intersection", "1 of the 8 canonical Venn regions"],
+    plainEnglish: `Contains respondents who selected both ${a} and ${c || "Set C"}, but excluded Set B.`,
+    properties: ["Exact 2-way intersection", "Disjoint from triple intersection", "Partition component"],
   }),
   only_bc: (_a, b, c) => ({
     title: "Region 6: BC Only",
     math: "(B \\cap C) \\setminus A = B \\cap C \\cap A^c",
-    plainEnglish: `Contains respondents who chose both ${b} and ${c || "Set C"}, but specifically did NOT choose Set A.`,
-    properties: ["2-trait specific overlap", "Disjoint from triple intersection", "1 of the 8 canonical Venn regions"],
+    plainEnglish: `Contains respondents who selected both ${b} and ${c || "Set C"}, but excluded Set A.`,
+    properties: ["Exact 2-way intersection", "Disjoint from triple intersection", "Partition component"],
   }),
   outside_abc: () => ({
     title: "Region 8: Outside All Three",
@@ -168,47 +168,49 @@ export function EducationalCard({
   const def = getDef(setAName, setBName, setCName);
 
   return (
-    <div className="rounded-xs border border-stone-300/80 bg-white p-5 shadow-none text-stone-900 space-y-4">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-stone-200/80 pb-3">
+    <div className="rounded-3xl border border-[#EAE3D5] bg-white p-6 sm:p-8 shadow-[0_15px_40px_-15px_rgba(44,38,28,0.06)] space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#F5F1E8] pb-4">
         <div>
-          <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500">
+          <span className="text-[10px] font-sora font-bold uppercase tracking-wider text-stone-500">
             Set Theoretic Definition &amp; Theory
           </span>
-          <h3 className="text-sm font-semibold tracking-tight text-stone-900 mt-0.5 font-sans">
+          <h3 className="text-base font-heading font-extrabold tracking-tight text-[#1C1B18] mt-0.5">
             {def.title}
           </h3>
         </div>
         <div className="flex items-center gap-2">
           <Badge variant="cobalt">Formal Identity</Badge>
-          <span className="font-mono text-xs font-semibold text-stone-900 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded">
+          <span className="font-sora text-xs font-bold text-stone-900 bg-[#FAF8F5] border border-[#EAE3D5] px-3 py-1 rounded-full shadow-2xs">
             n = {resultCount} / {totalUniverse}
           </span>
         </div>
       </div>
 
       {/* KaTeX Mathematical Notation */}
-      <div className="rounded-xs border border-stone-200 bg-[#FAF9F5] p-3 text-center">
-        <KaTeXMath math={def.math} block className="text-stone-900 font-bold text-xs sm:text-sm" />
+      <div className="rounded-2xl border border-[#EAE3D5] bg-[#FAF8F5] p-5 text-center">
+        <KaTeXMath math={def.math} block className="text-[#1C1B18] font-bold text-xs sm:text-sm" />
       </div>
 
       {/* Plain-English Explanation */}
-      <div className="space-y-1 text-xs text-stone-700 leading-relaxed font-sans">
-        <span className="font-semibold text-stone-900 uppercase text-[10px] tracking-wider block font-mono">
+      <div className="space-y-1.5 text-xs text-stone-700 leading-relaxed font-sans">
+        <span className="font-heading font-bold text-[#1C1B18] uppercase text-[10px] tracking-wider block">
           Intuitive Explanation:
         </span>
-        <p>{def.plainEnglish}</p>
+        <p className="bg-[#FAF8F5] p-4 rounded-2xl border border-[#EAE3D5] leading-relaxed">
+          {def.plainEnglish}
+        </p>
       </div>
 
       {/* Mathematical Properties */}
-      <div className="border-t border-stone-200/80 pt-3">
-        <span className="font-semibold text-stone-900 uppercase text-[10px] tracking-wider block mb-2 font-mono">
+      <div className="border-t border-[#F5F1E8] pt-4">
+        <span className="font-heading font-bold text-[#1C1B18] uppercase text-[10px] tracking-wider block mb-3">
           Discrete Mathematical Properties:
         </span>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-stone-700 font-mono">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-stone-700 font-sans">
           {def.properties.map((prop, i) => (
-            <li key={i} className="flex items-center gap-1.5 bg-[#FAF9F5] p-2 rounded-md border border-stone-200">
-              <span className="h-1.5 w-1.5 rounded-full bg-stone-400 flex-shrink-0" />
-              <span>{prop}</span>
+            <li key={i} className="flex items-center gap-2 bg-[#FAF8F5] p-3 rounded-2xl border border-[#EAE3D5]">
+              <span className="h-1.5 w-1.5 rounded-full bg-blue-600 flex-shrink-0" />
+              <span className="font-sora text-[11px] font-semibold">{prop}</span>
             </li>
           ))}
         </ul>

@@ -45,9 +45,9 @@ export function ResponseExplorer({ responses }: ResponseExplorerProps) {
   const columns: Column<SurveyResponse>[] = [
     {
       key: "response_id",
-      header: "Respondent ID",
+      header: "ID",
       render: (r) => (
-        <span className="font-mono font-semibold text-stone-900">
+        <span className="font-sora font-semibold text-slate-900 bg-slate-100/80 px-2 py-0.5 rounded-md border border-slate-200/60 text-xs">
           {r.response_id}
         </span>
       ),
@@ -65,7 +65,7 @@ export function ResponseExplorer({ responses }: ResponseExplorerProps) {
       key: "budget_range",
       header: "Budget Tier",
       render: (r) => (
-        <span className="font-mono text-[11px] text-stone-600">
+        <span className="font-sora text-[11px] font-medium text-slate-600 bg-slate-50 px-2 py-0.5 rounded-full border border-slate-200/50">
           {r.budget_range}
         </span>
       ),
@@ -74,11 +74,11 @@ export function ResponseExplorer({ responses }: ResponseExplorerProps) {
       key: "preferred_features",
       header: "Selected Features (Exactly 3 Distinct)",
       render: (r) => (
-        <div className="flex flex-wrap gap-1">
+        <div className="flex flex-wrap gap-1.5">
           {r.preferred_features.map((f, i) => (
             <span
               key={i}
-              className="inline-block rounded bg-stone-100 px-1.5 py-0.5 text-[10px] text-stone-700 font-medium"
+              className="inline-block rounded-full bg-blue-50/80 border border-blue-200/60 px-2.5 py-0.5 text-[11px] text-blue-800 font-sans font-medium"
             >
               {f}
             </span>
@@ -90,7 +90,7 @@ export function ResponseExplorer({ responses }: ResponseExplorerProps) {
       key: "primary_use",
       header: "Primary Use",
       render: (r) => (
-        <span className="text-stone-600 text-xs font-sans">
+        <span className="text-slate-600 text-xs font-sans">
           {r.primary_use}
         </span>
       ),
@@ -99,7 +99,7 @@ export function ResponseExplorer({ responses }: ResponseExplorerProps) {
       key: "os_preference",
       header: "OS",
       render: (r) => (
-        <span className="font-mono text-[11px] text-stone-500">
+        <span className="font-sora text-[11px] font-medium text-slate-500">
           {r.os_preference}
         </span>
       ),
@@ -107,7 +107,7 @@ export function ResponseExplorer({ responses }: ResponseExplorerProps) {
   ];
 
   return (
-    <div className="space-y-3.5">
+    <div className="space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <Tabs
           items={brandTabs}
@@ -116,18 +116,18 @@ export function ResponseExplorer({ responses }: ResponseExplorerProps) {
           size="sm"
         />
 
-        <div className="relative w-full sm:w-64">
+        <div className="relative w-full sm:w-72">
           <input
             type="text"
             placeholder="Search respondent or feature..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-md border border-stone-200 bg-white px-3 py-1.5 text-xs text-stone-800 placeholder-stone-400 shadow-2xs focus:border-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-400"
+            className="w-full rounded-full border border-slate-200 bg-white/80 backdrop-blur-md px-4 py-2 text-xs text-slate-800 placeholder-slate-400 shadow-xs focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery("")}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-stone-400 hover:text-stone-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400 hover:text-slate-600"
             >
               &times;
             </button>
@@ -142,11 +142,11 @@ export function ResponseExplorer({ responses }: ResponseExplorerProps) {
         emptyMessage="No respondents match the active filter criteria"
       />
 
-      <div className="flex items-center justify-between text-[11px] text-stone-400 px-1 font-sans">
+      <div className="flex items-center justify-between text-[11px] text-slate-400 px-2 font-sans">
         <span>
-          Showing {filteredResponses.length} of {responses.length} respondent records
+          Showing <strong className="text-slate-600 font-sora">{filteredResponses.length}</strong> of {responses.length} respondent records
         </span>
-        <span className="font-mono text-[10px] text-stone-400">
+        <span className="font-sora text-[10px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">
           Validated via Zod SurveyResponseSchema
         </span>
       </div>

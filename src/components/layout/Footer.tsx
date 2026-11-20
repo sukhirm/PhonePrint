@@ -4,11 +4,8 @@ import { PhonePrintLogo } from "@/components/ui/PhonePrintLogo";
 
 export function Footer() {
   return (
-    <footer className="border-t border-stone-300/80 bg-[#F4F3EE] text-xs text-stone-600 mt-28">
-      {/* Editorial top accent double rule */}
-      <div className="editorial-double-line w-full" />
-
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <footer className="mt-24 border-t border-[#EAE3D5]/80 bg-[#FBF9F4] text-xs text-stone-600">
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
           {/* Brand info */}
           <div className="space-y-4 md:col-span-2">
@@ -16,100 +13,113 @@ export function Footer() {
               <PhonePrintLogo size={32} showWordmark />
             </Link>
             <p className="max-w-md text-xs leading-relaxed text-stone-600 font-sans">
-              An interactive research laboratory modeling smartphone brand and feature
-              preferences through axiomatic discrete set theory, combinatorial spaces,
-              and educational graph-theoretic visualization.
+              Interactive preference analytics platform modeling smartphone choices through discrete mathematics,
+              combinatorial structures $C(7,3)$, ordered permutations $P(7,3)$, and set-theoretic partition verification.
             </p>
-            <div className="rounded-xs border border-stone-300/80 bg-white p-3.5 text-[11px] text-stone-700 shadow-none">
-              <span className="font-semibold text-stone-900 font-mono uppercase tracking-wide text-[10px] block mb-1">
-                {"//"} Academic Research Disclosure
+            <div className="rounded-2xl border border-[#EAE3D5] bg-white p-4 text-[11px] text-stone-600 shadow-2xs">
+              <span className="font-semibold text-[#1C1B18] font-sora uppercase tracking-wider text-[10px] block mb-1">
+                Academic Research Benchmark
               </span>
-              Current demonstration runs on <code className="font-mono text-cobalt-800 font-semibold bg-cobalt-50 px-1 py-0.5 rounded-xs border border-cobalt-200/80">SIMULATED CAMPUS DATA — N=30</code>. All records are synthesized for software architecture validation and pedagogical exploration.
+              Empirical demonstration calibrated on <span className="font-sora text-emerald-800 font-semibold bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200">CAMPUS COHORT — N=30</span> with strict 3-feature choice schema.
             </div>
           </div>
 
           {/* Core Modules */}
           <div>
-            <h4 className="font-serif font-bold text-stone-900 text-sm mb-3">
-              Laboratory Modules
+            <h4 className="font-heading font-bold text-[#1C1B18] text-sm mb-3">
+              Research Modules
             </h4>
-            <ul className="space-y-2 font-mono text-[11px]">
+            <ul className="space-y-2.5 font-sans text-xs">
               <li>
                 <Link
                   href="/"
-                  className="text-stone-600 hover:text-stone-900 transition-colors"
+                  className="text-stone-600 hover:text-[#1C1B18] transition-colors flex items-center gap-1.5"
                 >
-                  [01] Campus Pulse
+                  <span className="font-sora text-[10px] text-stone-400">01</span>
+                  Campus Pulse
                 </Link>
               </li>
               <li>
                 <Link
                   href="/my-phoneprint"
-                  className="text-stone-600 hover:text-stone-900 transition-colors"
+                  className="text-stone-600 hover:text-[#1C1B18] transition-colors flex items-center gap-1.5"
                 >
-                  [02] My PhonePrint
+                  <span className="font-sora text-[10px] text-stone-400">02</span>
+                  My PhonePrint
                 </Link>
               </li>
               <li>
                 <Link
                   href="/setlab"
-                  className="text-stone-600 hover:text-stone-900 transition-colors"
+                  className="text-stone-600 hover:text-[#1C1B18] transition-colors flex items-center gap-1.5"
                 >
-                  [03] SetLab (Venn &amp; PIE)
+                  <span className="font-sora text-[10px] text-stone-400">03</span>
+                  SetLab (Venn &amp; PIE)
                 </Link>
               </li>
               <li>
                 <Link
                   href="/combolab"
-                  className="text-stone-600 hover:text-stone-900 transition-colors"
+                  className="text-stone-600 hover:text-[#1C1B18] transition-colors flex items-center gap-1.5"
                 >
-                  [04] ComboLab (C(7,3))
+                  <span className="font-sora text-[10px] text-stone-400">04</span>
+                  ComboLab (C(7,3)=35)
                 </Link>
               </li>
               <li>
                 <Link
                   href="/experiment-studio"
-                  className="text-stone-600 hover:text-stone-900 transition-colors"
+                  className="text-stone-600 hover:text-[#1C1B18] transition-colors flex items-center gap-1.5"
                 >
-                  [05] Experiment Studio
+                  <span className="font-sora text-[10px] text-stone-400">05</span>
+                  Experiment Studio
                 </Link>
               </li>
               <li>
                 <Link
                   href="/methodology"
-                  className="text-stone-600 hover:text-stone-900 transition-colors"
+                  className="text-stone-600 hover:text-[#1C1B18] transition-colors flex items-center gap-1.5"
                 >
-                  [06] Methodology
+                  <span className="font-sora text-[10px] text-stone-400">06</span>
+                  Methodology &amp; Proofs
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Academic Foundation */}
+          {/* Mathematical Pillars */}
           <div>
-            <h4 className="font-serif font-bold text-stone-900 text-sm mb-3">
-              Discrete Mathematics
+            <h4 className="font-heading font-bold text-[#1C1B18] text-sm mb-3">
+              Mathematical Core
             </h4>
-            <ul className="space-y-2 text-[11px] text-stone-600">
-              <li>&bull; Principle of Inclusion-Exclusion</li>
-              <li>&bull; Binomial Coefficients &amp; Permutations</li>
-              <li>&bull; Partition Conservation ($N_3+N_2+N_1+N_0=N$)</li>
-              <li>&bull; Dynamic 300% Feature-Sum Invariant</li>
-              <li className="pt-2">
-                <Link
-                  href="/methodology"
-                  className="font-mono text-stone-900 underline hover:text-cobalt-600 transition-colors"
-                >
-                  Read Mathematical Proofs &rarr;
-                </Link>
+            <ul className="space-y-2 font-sora text-[11px] text-stone-600">
+              <li className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+                PIE Theorem Verification
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-stone-700" />
+                Combinations C(7,3) = 35 triplets
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
+                Partition Conservation (N₃+N₂+N₁+N₀=N)
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-600" />
+                Permutations P(7,3) = 210
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-stone-300/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-500 font-mono">
-          <p>&copy; 2026 PhonePrint Research Group. Discrete Mathematics Academic Platform.</p>
-          <p>Indian Rupee (INR ₹) Locale // Verified Invariant Engine</p>
+        <div className="mt-12 border-t border-[#EAE3D5] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-stone-500 text-[11px] font-sans">
+          <p>&copy; PhonePrint Analytics. Discrete Mathematics &amp; Preference Dynamics.</p>
+          <div className="flex items-center gap-4 font-sora">
+            <span>Warm Beige &amp; Cream Minimal Aesthetic</span>
+            <span>&bull;</span>
+            <span>Presentation Ready</span>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,27 +1,33 @@
 @import "katex/dist/katex.min.css";
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #FBFBF9;
-  --foreground: #181715;
-  --surface-paper: #FBFBF9;
+  --font-dm-sans: 'DM Sans', -apple-system, sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-sora: 'Sora', sans-serif;
+  --background: #FBF9F4;
+  --foreground: #1C1B18;
+  --surface-paper: #FBF9F4;
   --surface-card: #FFFFFF;
-  --surface-subtle: #F4F3EE;
-  --surface-border: #E5E3DC;
-  --accent-cobalt: #2563EB;
-  --accent-lime: #65A30D;
+  --surface-subtle: #F5F1E8;
+  --surface-border: rgba(220, 212, 198, 0.75);
+  --accent-cobalt: #1E3A8A;
+  --accent-lime: #15803D;
+  --accent-amber: #B45309;
 }
 
 body {
+  font-family: 'DM Sans', var(--font-dm-sans), -apple-system, sans-serif;
   color: var(--foreground);
-  background-color: var(--background);
+  background-color: #FBF9F4;
   background-image: 
-    linear-gradient(to right, rgba(24, 23, 21, 0.032) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(24, 23, 21, 0.032) 1px, transparent 1px);
-  background-size: 24px 24px;
+    radial-gradient(at 0% 0%, rgba(245, 239, 228, 0.8) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(240, 233, 218, 0.7) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(251, 249, 244, 0.9) 0px, transparent 50%);
   background-attachment: fixed;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   text-rendering: optimizeLegibility;
@@ -29,15 +35,27 @@ body {
   min-height: 100vh;
 }
 
-::selection {
-  background-color: #DBEAFE;
-  color: #1E40AF;
+/* Headings strictly in Montserrat */
+h1, h2, h3, h4, h5, h6, .font-heading, .font-display, .font-serif {
+  font-family: 'Montserrat', var(--font-montserrat), sans-serif !important;
+  letter-spacing: -0.025em;
 }
 
-/* Custom subtle scrollbar for light editorial theme */
+/* Tabular & numerical metrics strictly in Sora */
+.font-mono, .font-sora, code, kbd, samp {
+  font-family: 'Sora', var(--font-sora), sans-serif !important;
+  font-feature-settings: "tnum" 1, "cv01" 1;
+}
+
+::selection {
+  background-color: #E8E2D6;
+  color: #1C1B18;
+}
+
+/* Subtle modern warm glass scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -45,71 +63,61 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D3D0C7;
-  border-radius: 2px;
+  background: rgba(168, 159, 142, 0.45);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A8A59C;
+  background: rgba(120, 113, 100, 0.7);
 }
 
-/* Editorial styling utilities */
-.bg-grid-paper {
-  background-size: 24px 24px;
-  background-image: 
-    linear-gradient(to right, rgba(24, 23, 21, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(24, 23, 21, 0.035) 1px, transparent 1px);
+/* Warm Cream Glassmorphism Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(232, 226, 213, 0.85);
+  box-shadow: 0 10px 30px -10px rgba(44, 38, 28, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
-.bg-dot-matrix {
-  background-image: radial-gradient(rgba(24, 23, 21, 0.12) 1px, transparent 1px);
-  background-size: 16px 16px;
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(232, 226, 213, 0.9);
+  box-shadow: 0 12px 35px -8px rgba(44, 38, 28, 0.04), 0 2px 6px -1px rgba(44, 38, 28, 0.02), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-radius: 1.25rem;
 }
 
-.editorial-line {
-  height: 1px;
-  background-color: #181715;
+.glass-card-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.editorial-hairline {
-  height: 1px;
-  background-color: #E5E3DC;
+.glass-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 45px -10px rgba(44, 38, 28, 0.09), inset 0 1px 0 rgba(255, 255, 255, 1);
+  border-color: rgba(216, 207, 191, 0.95);
 }
 
-.editorial-double-line {
-  border-top: 1px solid #181715;
-  border-bottom: 1px solid #181715;
-  padding-bottom: 2px;
-  margin-bottom: 2px;
+.glass-pill {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 226, 213, 0.85);
+  box-shadow: 0 4px 15px -3px rgba(44, 38, 28, 0.04);
 }
 
-/* Drafting crosshair ornament */
-.crosshair-corner {
-  position: relative;
-}
-.crosshair-corner::before {
-  content: "+";
-  position: absolute;
-  top: -7px;
-  left: -5px;
-  font-family: monospace;
-  font-size: 11px;
-  color: #9CA3AF;
-  pointer-events: none;
-}
-.crosshair-corner::after {
-  content: "+";
-  position: absolute;
-  top: -7px;
-  right: -5px;
-  font-family: monospace;
-  font-size: 11px;
-  color: #9CA3AF;
-  pointer-events: none;
+.glass-input {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(220, 212, 198, 0.8);
+  transition: all 0.2s ease;
 }
 
-/* Monospace tag bracket styling */
-.editorial-bracket {
-  letter-spacing: 0.05em;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+.glass-input:focus {
+  background: #ffffff;
+  border-color: rgba(28, 27, 24, 0.6);
+  box-shadow: 0 0 0 3px rgba(28, 27, 24, 0.08);
+  outline: none;
 }

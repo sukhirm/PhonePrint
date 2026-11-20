@@ -43,29 +43,29 @@ export function SetSelector({
   const optionC = availableOptions.find((o) => o.id === setCId);
 
   return (
-    <div className="rounded-xs border border-stone-300/80 bg-white p-5 shadow-none text-stone-900 space-y-4">
+    <div className="rounded-3xl border border-[#EAE3D5] bg-white p-6 sm:p-8 shadow-[0_15px_40px_-15px_rgba(44,38,28,0.06)] space-y-6">
       {/* Header and Mode Toggle */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-300/80 pb-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#F5F1E8] pb-4">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-sm font-semibold tracking-tight text-stone-900 font-sans">
+            <h3 className="text-lg font-heading font-extrabold tracking-tight text-[#1C1B18]">
               Set Definition Workspace
             </h3>
             <Badge variant="cobalt">Discrete Partitions</Badge>
           </div>
           <p className="text-xs text-stone-500 mt-0.5 font-sans">
-            Select {mode === "2-set" ? "two" : "three"} distinct brand or feature cohorts from the universe (U = {totalUniverseSize} respondents)
+            Select {mode === "2-set" ? "two" : "three"} distinct brand or feature cohorts from the universe (U = {totalUniverseSize} students)
           </p>
         </div>
 
         {/* 2-Set vs 3-Set Mode Switch */}
-        <div className="inline-flex rounded-xs border border-stone-300/80 bg-[#FAF9F5] p-1 text-xs">
+        <div className="inline-flex rounded-full border border-[#EAE3D5] bg-[#FBF9F4] p-1 text-xs shadow-2xs">
           <button
             type="button"
             onClick={() => onModeChange("2-set")}
-            className={`px-3 py-1 rounded-xs text-xs font-medium transition-colors ${
+            className={`px-4 py-1.5 rounded-full text-xs font-sora font-semibold transition-all duration-200 cursor-pointer ${
               mode === "2-set"
-                ? "bg-white text-stone-900 font-semibold border border-stone-300/80 shadow-none"
+                ? "bg-[#1C1B18] text-white shadow-xs"
                 : "text-stone-600 hover:text-stone-900"
             }`}
           >
@@ -74,9 +74,9 @@ export function SetSelector({
           <button
             type="button"
             onClick={() => onModeChange("3-set")}
-            className={`px-3 py-1 rounded-xs text-xs font-medium transition-colors ${
+            className={`px-4 py-1.5 rounded-full text-xs font-sora font-semibold transition-all duration-200 cursor-pointer ${
               mode === "3-set"
-                ? "bg-white text-stone-900 font-semibold border border-stone-300/80 shadow-none"
+                ? "bg-[#1C1B18] text-white shadow-xs"
                 : "text-stone-600 hover:text-stone-900"
             }`}
           >
@@ -88,19 +88,19 @@ export function SetSelector({
       {/* Set Pickers Grid */}
       <div className={`grid grid-cols-1 gap-4 ${mode === "3-set" ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
         {/* SET A */}
-        <div className="rounded-xs border border-stone-300/80 bg-[#FAF9F5] p-4 space-y-2.5">
+        <div className="rounded-3xl border border-[#EAE3D5] bg-[#FAF8F5] p-5 space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="flex h-5 w-5 items-center justify-center rounded-xs bg-cobalt-600 text-white font-mono font-bold text-xs">
+              <span className="flex h-6 w-6 items-center justify-center rounded-xl bg-blue-700 text-white font-sora font-bold text-xs shadow-2xs">
                 A
               </span>
-              <span className="font-semibold text-stone-900 text-xs">Set A</span>
+              <span className="font-heading font-extrabold text-[#1C1B18] text-xs">Set A</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="font-mono text-xs font-medium text-cobalt-800 bg-white border border-stone-300/80 px-2 py-0.5 rounded-xs">
+              <span className="font-sora text-xs font-bold text-blue-900 bg-white border border-[#EAE3D5] px-2.5 py-0.5 rounded-full shadow-2xs">
                 |A| = {setASize}
               </span>
-              <span className="text-[10px] text-stone-500 font-mono">
+              <span className="text-[10px] text-stone-500 font-sora">
                 ({Math.round((setASize / totalUniverseSize) * 100)}%)
               </span>
             </div>
@@ -114,7 +114,7 @@ export function SetSelector({
               id="set-a-select"
               value={setAId}
               onChange={(e) => onSelectA(e.target.value)}
-              className="w-full rounded-xs border border-stone-300 bg-white px-3 py-1.5 text-xs font-medium text-stone-800 shadow-none focus:border-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-500"
+              className="w-full h-11 rounded-2xl border border-[#EAE3D5] bg-white px-3.5 text-xs font-sora font-semibold text-stone-900 shadow-2xs focus:border-[#1C1B18] focus:outline-none"
             >
               <optgroup label="Smartphone Brands">
                 {brandOptions.map((opt) => (
@@ -141,25 +141,25 @@ export function SetSelector({
             </select>
           </div>
 
-          <p className="text-[11px] text-stone-600 leading-relaxed border-t border-stone-300/80 pt-2 font-sans">
+          <p className="text-[11px] text-stone-600 leading-relaxed border-t border-[#EAE3D5] pt-2 font-sans">
             {optionA?.description}
           </p>
         </div>
 
         {/* SET B */}
-        <div className="rounded-xs border border-stone-300/80 bg-[#FAF9F5] p-4 space-y-2.5">
+        <div className="rounded-3xl border border-[#EAE3D5] bg-[#FAF8F5] p-5 space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="flex h-5 w-5 items-center justify-center rounded-xs bg-lime-600 text-white font-mono font-bold text-xs">
+              <span className="flex h-6 w-6 items-center justify-center rounded-xl bg-emerald-700 text-white font-sora font-bold text-xs shadow-2xs">
                 B
               </span>
-              <span className="font-semibold text-stone-900 text-xs">Set B</span>
+              <span className="font-heading font-extrabold text-[#1C1B18] text-xs">Set B</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="font-mono text-xs font-medium text-lime-800 bg-white border border-stone-300/80 px-2 py-0.5 rounded-xs">
+              <span className="font-sora text-xs font-bold text-emerald-900 bg-white border border-[#EAE3D5] px-2.5 py-0.5 rounded-full shadow-2xs">
                 |B| = {setBSize}
               </span>
-              <span className="text-[10px] text-stone-500 font-mono">
+              <span className="text-[10px] text-stone-500 font-sora">
                 ({Math.round((setBSize / totalUniverseSize) * 100)}%)
               </span>
             </div>
@@ -173,7 +173,7 @@ export function SetSelector({
               id="set-b-select"
               value={setBId}
               onChange={(e) => onSelectB(e.target.value)}
-              className="w-full rounded-xs border border-stone-300 bg-white px-3 py-1.5 text-xs font-medium text-stone-800 shadow-none focus:border-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-500"
+              className="w-full h-11 rounded-2xl border border-[#EAE3D5] bg-white px-3.5 text-xs font-sora font-semibold text-stone-900 shadow-2xs focus:border-[#1C1B18] focus:outline-none"
             >
               <optgroup label="Smartphone Brands">
                 {brandOptions.map((opt) => (
@@ -200,26 +200,26 @@ export function SetSelector({
             </select>
           </div>
 
-          <p className="text-[11px] text-stone-600 leading-relaxed border-t border-stone-300/80 pt-2 font-sans">
+          <p className="text-[11px] text-stone-600 leading-relaxed border-t border-[#EAE3D5] pt-2 font-sans">
             {optionB?.description}
           </p>
         </div>
 
         {/* SET C (Only in 3-set mode) */}
         {mode === "3-set" && (
-          <div className="rounded-xs border border-stone-300/80 bg-[#FAF9F5] p-4 space-y-2.5">
+          <div className="rounded-3xl border border-[#EAE3D5] bg-[#FAF8F5] p-5 space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="flex h-5 w-5 items-center justify-center rounded-xs bg-stone-800 text-white font-mono font-bold text-xs">
+                <span className="flex h-6 w-6 items-center justify-center rounded-xl bg-purple-700 text-white font-sora font-bold text-xs shadow-2xs">
                   C
                 </span>
-                <span className="font-semibold text-stone-900 text-xs">Set C</span>
+                <span className="font-heading font-extrabold text-[#1C1B18] text-xs">Set C</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="font-mono text-xs font-medium text-stone-800 bg-white border border-stone-300/80 px-2 py-0.5 rounded-xs">
+                <span className="font-sora text-xs font-bold text-purple-900 bg-white border border-[#EAE3D5] px-2.5 py-0.5 rounded-full shadow-2xs">
                   |C| = {setCSize}
                 </span>
-                <span className="text-[10px] text-stone-500 font-mono">
+                <span className="text-[10px] text-stone-500 font-sora">
                   ({Math.round((setCSize / totalUniverseSize) * 100)}%)
                 </span>
               </div>
@@ -233,7 +233,7 @@ export function SetSelector({
                 id="set-c-select"
                 value={setCId}
                 onChange={(e) => onSelectC(e.target.value)}
-                className="w-full rounded-xs border border-stone-300 bg-white px-3 py-1.5 text-xs font-medium text-stone-800 shadow-none focus:border-stone-500 focus:outline-none focus:ring-1 focus:ring-stone-500"
+                className="w-full h-11 rounded-2xl border border-[#EAE3D5] bg-white px-3.5 text-xs font-sora font-semibold text-stone-900 shadow-2xs focus:border-[#1C1B18] focus:outline-none"
               >
                 <optgroup label="Smartphone Brands">
                   {brandOptions.map((opt) => (
@@ -260,7 +260,7 @@ export function SetSelector({
               </select>
             </div>
 
-            <p className="text-[11px] text-stone-600 leading-relaxed border-t border-stone-300/80 pt-2 font-sans">
+            <p className="text-[11px] text-stone-600 leading-relaxed border-t border-[#EAE3D5] pt-2 font-sans">
               {optionC?.description}
             </p>
           </div>

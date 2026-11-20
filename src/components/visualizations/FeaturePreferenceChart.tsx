@@ -26,66 +26,80 @@ export interface FeaturePreferenceChartProps {
 
 export function FeaturePreferenceChart({
   data,
-  height = 300,
+  height = 320,
 }: FeaturePreferenceChartProps) {
-  // Sort descending by count for hierarchical readability
+  // Sort descending by count for clear rank hierarchy
   const sortedData = [...data].sort((a, b) => b.count - a.count);
 
-  // Subtle 3-tier visual hierarchy
-  // Tier 1 (dominant priorities): Acid Lime #84cc16
-  // Tier 2 (core performance specs): Cobalt #2563eb
-  // Tier 3 (supporting factors): Slate #64748b
-  const getFeatureColor = (index: number) => {
-    if (index < 2) return "#84cc16"; // Top 2 dominant priorities
-    if (index < 5) return "#2563eb"; // Middle performance tier
-    return "#64748b"; // Supporting tier
+  const getGradientId = (index: number) => {
+    if (index < 2) return "featureGradTop";
+    if (index < 5) return "featureGradMid";
+    return "featureGradTail";
   };
 
   return (
-    <div style={{ width: "100%", height }} className="pt-1">
+    <div style={{ width: "100%", height }} className="pt-2">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           layout="vertical"
           data={sortedData}
-          margin={{ top: 10, right: 30, left: 10, bottom: 10 }}
+          margin={{ top: 10, right: 35, left: 15, bottom: 10 }}
         >
+          <defs>
+            {/* Top tier dominant priorities: Emerald to Teal gradient */}
+            <linearGradient id="featureGradTop" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#10B981" stopOpacity={0.9} />
+              <stop offset="100%" stopColor="#059669" stopOpacity={1} />
+            </linearGradient>
+            {/* Core performance tier: Cobalt gradient */}
+            <linearGradient id="featureGradMid" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#60A5FA" stopOpacity={0.9} />
+              <stop offset="100%" stopColor="#2563EB" stopOpacity={1} />
+            </linearGradient>
+            {/* Supporting tier: Slate gradient */}
+            <linearGradient id="featureGradTail" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#94A3B8" stopOpacity={0.8} />
+              <stop offset="100%" stopColor="#64748B" stopOpacity={1} />
+            </linearGradient>
+          </defs>
           <CartesianGrid
-            strokeDasharray="3 3"
+            strokeDasharray="4 4"
             horizontal={false}
-            stroke="#f1f5f9"
+            stroke="#F1F5F9"
           />
           <XAxis
             type="number"
             allowDecimals={false}
-            tick={{ fontSize: 11, fill: "#64748b" }}
+            tick={{ fontSize: 11, fill: "#94A3B8", fontFamily: "var(--font-sora), Sora, sans-serif" }}
             tickLine={false}
             axisLine={false}
           />
           <YAxis
             type="category"
             dataKey="feature"
-            tick={{ fontSize: 11, fill: "#1e293b", fontWeight: 500 }}
-            width={165}
+            tick={{ fontSize: 12, fill: "#1E293B", fontFamily: "var(--font-dm-sans), DM Sans, sans-serif", fontWeight: 500 }}
+            width={175}
             tickLine={false}
-            axisLine={{ stroke: "#e2e8f0" }}
+            axisLine={{ stroke: "#E2E8F0" }}
           />
           <Tooltip
             content={<ChartTooltip unit="Selections" />}
-            cursor={{ fill: "rgba(132, 204, 22, 0.05)" }}
+            cursor={{ fill: "rgba(16, 185, 129, 0.04)" }}
           />
           <Bar
             dataKey="count"
             name="Selections"
-            radius={[0, 4, 4, 0]}
-            maxBarSize={22}
-            barSize={18}
-            isAnimationActive={false}
+            radius={[0, 8, 8, 0]}
+            maxBarSize={24}
+            barSize={20}
+            animationDuration={800}
+            animationEasing="ease-out"
           >
             {sortedData.map((_, index) => (
               <Cell
                 key={`feature-cell-${index}`}
-                fill={getFeatureColor(index)}
-                className="transition-opacity hover:opacity-85"
+                fill={`url(#${getGradientId(index)})`}
+                className="transition-all duration-200 hover:opacity-85"
               />
             ))}
           </Bar>
